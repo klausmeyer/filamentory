@@ -18,6 +18,11 @@ defmodule FilamentoryWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    resources "/brands", BrandController
+    resources "/materials", MaterialController
+    resources "/products", ProductController
+    resources "/variants", VariantController
   end
 
   # Other scopes may use custom stacks.

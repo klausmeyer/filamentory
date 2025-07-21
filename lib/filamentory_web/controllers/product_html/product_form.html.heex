@@ -1,0 +1,17 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+
+  <.input field={f[:brand_id]} type="text" label="Brand" />
+
+  <.input field={f[:material_id]} type="text" label="Material" />
+
+  <.input field={f[:variant_id]} type="text" label="Variant" />
+
+  <.input field={f[:name]} type="text" label="Name" />
+
+  <:actions>
+    <.button>Save Product</.button>
+  </:actions>
+</.simple_form>

@@ -1,0 +1,15 @@
+<.header>
+  Brand {@brand.id}
+  <:subtitle>This is a brand record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/brands/#{@brand}/edit"}>
+      <.button>Edit brand</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@brand.name}</:item>
+</.list>
+
+<.back navigate={~p"/brands"}>Back to brands</.back>

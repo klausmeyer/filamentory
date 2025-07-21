@@ -1,0 +1,15 @@
+<.header>
+  Variant {@variant.id}
+  <:subtitle>This is a variant record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/variants/#{@variant}/edit"}>
+      <.button>Edit variant</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@variant.name}</:item>
+</.list>
+
+<.back navigate={~p"/variants"}>Back to variants</.back>

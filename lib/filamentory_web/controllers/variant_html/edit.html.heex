@@ -1,0 +1,8 @@
+<.header>
+  Edit Variant {@variant.id}
+  <:subtitle>Use this form to manage variant records in your database.</:subtitle>
+</.header>
+
+<.variant_form changeset={@changeset} action={~p"/variants/#{@variant}"} />
+
+<.back navigate={~p"/variants"}>Back to variants</.back>

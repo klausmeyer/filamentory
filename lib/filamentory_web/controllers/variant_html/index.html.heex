@@ -1,0 +1,23 @@
+<.header>
+  Listing Variants
+  <:actions>
+    <.link href={~p"/variants/new"}>
+      <.button>New Variant</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="variants" rows={@variants} row_click={&JS.navigate(~p"/variants/#{&1}")}>
+  <:col :let={variant} label="Name">{variant.name}</:col>
+  <:action :let={variant}>
+    <div class="sr-only">
+      <.link navigate={~p"/variants/#{variant}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/variants/#{variant}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={variant}>
+    <.link href={~p"/variants/#{variant}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

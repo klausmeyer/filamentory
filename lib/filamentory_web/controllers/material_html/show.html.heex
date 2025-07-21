@@ -1,0 +1,15 @@
+<.header>
+  Material {@material.id}
+  <:subtitle>This is a material record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/materials/#{@material}/edit"}>
+      <.button>Edit material</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name">{@material.name}</:item>
+</.list>
+
+<.back navigate={~p"/materials"}>Back to materials</.back>

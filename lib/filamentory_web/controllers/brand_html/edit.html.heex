@@ -1,0 +1,8 @@
+<.header>
+  Edit Brand {@brand.id}
+  <:subtitle>Use this form to manage brand records in your database.</:subtitle>
+</.header>
+
+<.brand_form changeset={@changeset} action={~p"/brands/#{@brand}"} />
+
+<.back navigate={~p"/brands"}>Back to brands</.back>
