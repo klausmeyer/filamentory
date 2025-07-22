@@ -24,6 +24,7 @@ defmodule FilamentoryWeb.Router do
     resources "/products", ProductController
     resources "/variants", VariantController
     resources "/filaments", FilamentController
+    resources "/spools", SpoolController
   end
 
   # Other scopes may use custom stacks.

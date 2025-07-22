@@ -1,0 +1,19 @@
+<.header>
+  Spool {@spool.id}
+  <:subtitle>This is a spool record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/spools/#{@spool}/edit"}>
+      <.button>Edit spool</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Filament">{@spool.filament.name}</:item>
+  <:item title="Ovp?">{@spool.ovp}</:item>
+  <:item title="Refill only?">{@spool.refill_only}</:item>
+  <:item title="Gross weight grams">{@spool.gross_weight_grams}</:item>
+  <:item title="Comment">{@spool.comment}</:item>
+</.list>
+
+<.back navigate={~p"/spools"}>Back to spools</.back>

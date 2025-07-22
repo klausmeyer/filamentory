@@ -1,0 +1,42 @@
+<.header>
+  Listing Spools
+  <:actions>
+    <.link href={~p"/spools/new"}>
+      <.button>New Spool</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="spools" rows={@spools} row_click={&JS.navigate(~p"/spools/#{&1}")}>
+  <:col :let={spool} label="ID">{spool.id}</:col>
+  <:col :let={spool} label="Filament">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill={spool.filament.color_hex} class="bi bi-square-fill" viewBox="0 0 16 16">
+      <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z"/>
+    </svg>
+
+    {spool.filament.name}
+  </:col>
+  <:col :let={spool} label="OVP?">
+    <.icon :if={spool.ovp} name="hero-check-solid" class="text-green-500" />
+    <span :if={!spool.ovp}>-</span>
+  </:col>
+  <:col :let={spool} label="Refill only?">
+    <.icon :if={spool.refill_only} name="hero-check-solid" class="text-green-500" />
+    <span :if={!spool.refill_only}>-</span>
+  </:col>
+  <:col :let={spool} label="Gross weight grams">{spool.gross_weight_grams || "-"}</:col>
+  <:col :let={spool} label="Comment">
+    {spool.comment || "-"}
+  </:col>
+  <:action :let={spool}>
+    <div class="sr-only">
+      <.link navigate={~p"/spools/#{spool}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/spools/#{spool}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={spool}>
+    <.link href={~p"/spools/#{spool}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

@@ -1,0 +1,8 @@
+<.header>
+  Edit Spool {@spool.id}
+  <:subtitle>Use this form to manage spool records in your database.</:subtitle>
+</.header>
+
+<.spool_form changeset={@changeset} action={~p"/spools/#{@spool}"} />
+
+<.back navigate={~p"/spools"}>Back to spools</.back>

@@ -18,7 +18,9 @@ defmodule Filamentory.Filaments do
 
   """
   def list_filaments do
-    Repo.all(Filament)
+    Filament
+    |> order_by(asc: :id)
+    |> Repo.all
     |> Repo.preload([:product])
   end
 

@@ -16,6 +16,7 @@ alias Filamentory.Materials.Material
 alias Filamentory.Variants.Variant
 alias Filamentory.Products.Product
 alias Filamentory.Filaments.Filament
+alias Filamentory.Spools.Spool
 
 bambu  = Repo.insert! %Brand{name: "Bambu Lab"}
 elegoo = Repo.insert! %Brand{name: "Elegoo"}
@@ -35,20 +36,23 @@ elegoo_pla_matte = Repo.insert! %Product{brand: elegoo, material: pla, variant: 
 
 elegoo_petg_basic = Repo.insert! %Product{brand: elegoo, material: petg, variant: basic, name: "Elegoo - Rapid PETG"}
 
-Repo.insert! %Filament{product: bambu_pla_basic, color_name: "Black", color_hex: "#000000"}
-Repo.insert! %Filament{product: bambu_pla_basic, color_name: "Gray", color_hex: "#c2c2c2"}
+bambu_pla_basic_black = Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_basic.id, color_name: "Black", color_hex: "#000000"})
+bambu_pla_basic_grey  = Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_basic.id, color_name: "Grey", color_hex: "#c2c2c2"})
 
-Repo.insert! %Filament{product: bambu_pla_matte, color_name: "Ash Grey", color_hex: "#909396"}
-Repo.insert! %Filament{product: bambu_pla_matte, color_name: "Charcoal", color_hex: "#000000"}
-Repo.insert! %Filament{product: bambu_pla_matte, color_name: "Dark Red", color_hex: "#b2353b"}
-Repo.insert! %Filament{product: bambu_pla_matte, color_name: "Ivory White", color_hex: "#ffffff"}
-Repo.insert! %Filament{product: bambu_pla_matte, color_name: "Mandarin Orange", color_hex: "#f88d58"}
-Repo.insert! %Filament{product: bambu_pla_matte, color_name: "Marine Blue", color_hex: "#006eb7"}
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_matte.id, color_name: "Ash Grey", color_hex: "#909396"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_matte.id, color_name: "Charcoal", color_hex: "#000000"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_matte.id, color_name: "Dark Red", color_hex: "#b2353b"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_matte.id, color_name: "Ivory White", color_hex: "#ffffff"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_matte.id, color_name: "Mandarin Orange", color_hex: "#f88d58"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_matte.id, color_name: "Marine Blue", color_hex: "#006eb7"})
 
-Repo.insert! %Filament{product: elegoo_pla_basic, color_name: "Black", color_hex: "#000000"}
-Repo.insert! %Filament{product: elegoo_pla_basic, color_name: "Dark Blue", color_hex: "#2240af"}
-Repo.insert! %Filament{product: elegoo_pla_basic, color_name: "Neon Green", color_hex: "#08e327"}
-Repo.insert! %Filament{product: elegoo_pla_basic, color_name: "Translucent", color_hex: "#f3f3f3"}
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: elegoo_pla_basic.id, color_name: "Black", color_hex: "#000000"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: elegoo_pla_basic.id, color_name: "Dark Blue", color_hex: "#2240af"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: elegoo_pla_basic.id, color_name: "Neon Green", color_hex: "#08e327"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: elegoo_pla_basic.id, color_name: "Translucent", color_hex: "#f3f3f3"})
 
-Repo.insert! %Filament{product: elegoo_petg_basic, color_name: "Red", color_hex: "#ea140e"}
-Repo.insert! %Filament{product: elegoo_petg_basic, color_name: "White", color_hex: "#ffffff"}
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: elegoo_petg_basic.id, color_name: "Red", color_hex: "#ea140e"})
+Repo.insert! Filament.changeset(%Filament{}, %{product_id: elegoo_petg_basic.id, color_name: "White", color_hex: "#ffffff"})
+
+Repo.insert! %Spool{filament: bambu_pla_basic_black, ovp: false, refill_only: false, gross_weight_grams: 714, comment: nil}
+Repo.insert! %Spool{filament: bambu_pla_basic_grey, ovp: true, refill_only: false, gross_weight_grams: nil, comment: nil}
