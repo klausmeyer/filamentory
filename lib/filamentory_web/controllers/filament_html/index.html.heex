@@ -1,0 +1,29 @@
+<.header>
+  Listing Filaments
+  <:actions>
+    <.link href={~p"/filaments/new"}>
+      <.button>New Filament</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="filaments" rows={@filaments} row_click={&JS.navigate(~p"/filaments/#{&1}")}>
+  <:col :let={filament} label="Product">{filament.product.name}</:col>
+  <:col :let={filament} label="Color hex">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill={filament.color_hex} class="bi bi-square-fill" viewBox="0 0 16 16">
+      <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z"/>
+    </svg>
+  </:col>
+  <:col :let={filament} label="Color name">{filament.color_name}</:col>
+  <:action :let={filament}>
+    <div class="sr-only">
+      <.link navigate={~p"/filaments/#{filament}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/filaments/#{filament}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={filament}>
+    <.link href={~p"/filaments/#{filament}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

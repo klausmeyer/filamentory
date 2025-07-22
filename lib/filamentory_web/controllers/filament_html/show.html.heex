@@ -1,0 +1,16 @@
+<.header>
+  Filament {@filament.id}
+  <:subtitle>This is a filament record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/filaments/#{@filament}/edit"}>
+      <.button>Edit filament</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Color name">{@filament.color_name}</:item>
+  <:item title="Color hex">{@filament.color_hex}</:item>
+</.list>
+
+<.back navigate={~p"/filaments"}>Back to filaments</.back>

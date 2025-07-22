@@ -1,0 +1,8 @@
+<.header>
+  Edit Filament {@filament.id}
+  <:subtitle>Use this form to manage filament records in your database.</:subtitle>
+</.header>
+
+<.filament_form changeset={@changeset} action={~p"/filaments/#{@filament}"} />
+
+<.back navigate={~p"/filaments"}>Back to filaments</.back>

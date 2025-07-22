@@ -1,0 +1,10 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:color_name]} type="text" label="Color name" />
+  <.input field={f[:color_hex]} type="text" label="Color hex" />
+  <:actions>
+    <.button>Save Filament</.button>
+  </:actions>
+</.simple_form>
