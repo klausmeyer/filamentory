@@ -28,13 +28,13 @@ basic = Repo.insert! %Variant{name: "Basic"}
 matte = Repo.insert! %Variant{name: "Matte"}
 silk  = Repo.insert! %Variant{name: "Silk"}
 
-bambu_pla_basic = Repo.insert! %Product{brand: bambu, material: pla, variant: basic, name: "Bambu Lab - PLA Basic"}
-bambu_pla_matte = Repo.insert! %Product{brand: bambu, material: pla, variant: matte, name: "Bambu Lab - PLA Matte"}
+bambu_pla_basic = Repo.insert! %Product{brand: bambu, material: pla, variant: basic, name: "Bambu Lab - PLA Basic", weight_grams: 1_000, spool_weight_grams: 250}
+bambu_pla_matte = Repo.insert! %Product{brand: bambu, material: pla, variant: matte, name: "Bambu Lab - PLA Matte", weight_grams: 1_000, spool_weight_grams: 250}
 
-elegoo_pla_basic = Repo.insert! %Product{brand: elegoo, material: pla, variant: basic, name: "Elegoo - PLA Basic"}
-elegoo_pla_matte = Repo.insert! %Product{brand: elegoo, material: pla, variant: matte, name: "Elegoo - PLA Matte"}
+elegoo_pla_basic = Repo.insert! %Product{brand: elegoo, material: pla, variant: basic, name: "Elegoo - PLA Basic", weight_grams: 1_000, spool_weight_grams: 175}
+elegoo_pla_matte = Repo.insert! %Product{brand: elegoo, material: pla, variant: matte, name: "Elegoo - PLA Matte", weight_grams: 1_000, spool_weight_grams: 175}
 
-elegoo_petg_basic = Repo.insert! %Product{brand: elegoo, material: petg, variant: basic, name: "Elegoo - Rapid PETG"}
+elegoo_petg_basic = Repo.insert! %Product{brand: elegoo, material: petg, variant: basic, name: "Elegoo - Rapid PETG", weight_grams: 1_000, spool_weight_grams: 175}
 
 bambu_pla_basic_black = Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_basic.id, color_name: "Black", color_hex: "#000000"})
 bambu_pla_basic_grey  = Repo.insert! Filament.changeset(%Filament{}, %{product_id: bambu_pla_basic.id, color_name: "Grey", color_hex: "#c2c2c2"})

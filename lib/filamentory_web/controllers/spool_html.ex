@@ -1,6 +1,8 @@
 defmodule FilamentoryWeb.SpoolHTML do
   use FilamentoryWeb, :html
 
+  import FilamentoryWeb.SpoolComponents
+
   embed_templates "spool_html/*"
 
   @doc """
@@ -10,4 +12,5 @@ defmodule FilamentoryWeb.SpoolHTML do
   attr :action, :string, required: true
 
   def spool_form(assigns)
+
 end

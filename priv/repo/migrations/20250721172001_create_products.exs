@@ -7,6 +7,8 @@ defmodule Filamentory.Repo.Migrations.CreateProducts do
       add :brand_id, references(:brands, on_delete: :nothing)
       add :material_id, references(:materials, on_delete: :nothing)
       add :variant_id, references(:variants, on_delete: :nothing)
+      add :spool_weight_grams, :integer
+      add :weight_grams, :integer
 
       timestamps(type: :utc_datetime)
     end
