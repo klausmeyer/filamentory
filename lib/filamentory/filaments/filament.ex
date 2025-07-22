@@ -13,8 +13,8 @@ defmodule Filamentory.Filaments.Filament do
   @doc false
   def changeset(filament, attrs) do
     filament
-    |> cast(attrs, [:color_name, :color_hex])
-    |> validate_required([:color_name, :color_hex])
+    |> cast(attrs, [:product_id, :color_name, :color_hex])
+    |> validate_required([:product_id, :color_name, :color_hex])
     |> foreign_key_constraint(:product_id)
   end
 end
