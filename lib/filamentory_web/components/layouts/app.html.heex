@@ -1,68 +1,97 @@
-<header class="px-4 py-4 sm:px-6 lg:px-8">
-  <h1 class="my-4">Filamentory</h1>
+<header class="bg-gray-900 text-white mb-4">
+  <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <div class="md:flex md:items-center md:gap-12">
+        <a class="block" href="#">
+          <.icon name="hero-circle-stack-solid" class="h-8 w-8" /> Filamentory
+        </a>
+      </div>
 
-  <ul class="list-disc">
-    <li>
-      <a data-active={@conn.request_path == "/"} class="data-[active]:font-bold" href={~p"/"}>
-        Home
-      </a>
-    </li>
-    <li>
-      <a
-        data-active={String.starts_with?(@conn.request_path, ~p"/brands")}
-        class="data-[active]:font-bold"
-        href={~p"/brands"}
-      >
-        Brands
-      </a>
-    </li>
-    <li>
-      <a
-        data-active={String.starts_with?(@conn.request_path, ~p"/materials")}
-        class="data-[active]:font-bold"
-        href={~p"/materials"}
-      >
-        Materials
-      </a>
-    </li>
-    <li>
-      <a
-        data-active={String.starts_with?(@conn.request_path, ~p"/variants")}
-        class="data-[active]:font-bold"
-        href={~p"/variants"}
-      >
-        Variants
-      </a>
-    </li>
-    <li>
-      <a
-        data-active={String.starts_with?(@conn.request_path, ~p"/products")}
-        class="data-[active]:font-bold"
-        href={~p"/products"}
-      >
-        Products
-      </a>
-    </li>
-    <li>
-      <a
-        data-active={String.starts_with?(@conn.request_path, ~p"/filaments")}
-        class="data-[active]:font-bold"
-        href={~p"/filaments"}
-      >
-        Filaments
-      </a>
-    </li>
-    <li>
-      <a
-        data-active={String.starts_with?(@conn.request_path, ~p"/spools")}
-        class="data-[active]:font-bold"
-        href={~p"/spools"}
-      >
-        Spools
-      </a>
-    </li>
-  </ul>
+      <div class="hidden md:block">
+        <nav aria-label="Global">
+          <ul class="flex items-center gap-6 text-sm">
+            <li>
+              <a
+                data-active={String.starts_with?(@conn.request_path, ~p"/spools")}
+                class="data-[active]:font-bold"
+                href={~p"/spools"}
+              >
+                Spools
+              </a>
+            </li>
+            <li>
+              <a
+                data-active={String.starts_with?(@conn.request_path, ~p"/brands")}
+                class="data-[active]:font-bold"
+                href={~p"/brands"}
+              >
+                Brands
+              </a>
+            </li>
+            <li>
+              <a
+                data-active={String.starts_with?(@conn.request_path, ~p"/materials")}
+                class="data-[active]:font-bold"
+                href={~p"/materials"}
+              >
+                Materials
+              </a>
+            </li>
+            <li>
+              <a
+                data-active={String.starts_with?(@conn.request_path, ~p"/variants")}
+                class="data-[active]:font-bold"
+                href={~p"/variants"}
+              >
+                Variants
+              </a>
+            </li>
+            <li>
+              <a
+                data-active={String.starts_with?(@conn.request_path, ~p"/products")}
+                class="data-[active]:font-bold"
+                href={~p"/products"}
+              >
+                Products
+              </a>
+            </li>
+            <li>
+              <a
+                data-active={String.starts_with?(@conn.request_path, ~p"/filaments")}
+                class="data-[active]:font-bold"
+                href={~p"/filaments"}
+              >
+                Filaments
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="sm:flex sm:gap-4">
+          ...
+        </div>
+
+        <div class="block md:hidden">
+          <button class="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
+
 <main class="px-8">
   <div class="mx-auto">
     <.flash_group flash={@flash} />

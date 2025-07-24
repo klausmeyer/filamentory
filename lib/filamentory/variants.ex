@@ -18,7 +18,9 @@ defmodule Filamentory.Variants do
 
   """
   def list_variants do
-    Repo.all(Variant)
+    Variant
+    |> order_by(asc: :name)
+    |> Repo.all()
   end
 
   @doc """

@@ -18,7 +18,9 @@ defmodule Filamentory.Materials do
 
   """
   def list_materials do
-    Repo.all(Material)
+    Material
+    |> order_by(asc: :name)
+    |> Repo.all()
   end
 
   @doc """
