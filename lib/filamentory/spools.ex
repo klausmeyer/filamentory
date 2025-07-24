@@ -20,8 +20,8 @@ defmodule Filamentory.Spools do
   def list_spools do
     Spool
     |> order_by([{:asc, :filament_id}, {:asc, :ovp}])
-    |> Repo.all
-    |> Repo.preload([filament: :product])
+    |> Repo.all()
+    |> Repo.preload(filament: :product)
   end
 
   @doc """

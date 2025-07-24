@@ -16,8 +16,22 @@ defmodule Filamentory.Products.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:brand_id, :material_id, :variant_id, :name, :weight_grams, :spool_weight_grams])
-    |> validate_required([:brand_id, :material_id, :variant_id, :name, :weight_grams, :spool_weight_grams])
+    |> cast(attrs, [
+      :brand_id,
+      :material_id,
+      :variant_id,
+      :name,
+      :weight_grams,
+      :spool_weight_grams
+    ])
+    |> validate_required([
+      :brand_id,
+      :material_id,
+      :variant_id,
+      :name,
+      :weight_grams,
+      :spool_weight_grams
+    ])
     |> unique_constraint(:name)
     |> foreign_key_constraint(:brand_id)
     |> foreign_key_constraint(:material_id)

@@ -1,10 +1,11 @@
 defmodule Filamentory.ProductsTest do
-alias Filamentory.VariantsFixtures
-alias Filamentory.MaterialsFixtures
-alias Filamentory.BrandsFixtures
   use Filamentory.DataCase
 
   alias Filamentory.Products
+
+  import Filamentory.VariantsFixtures
+  import Filamentory.MaterialsFixtures
+  import Filamentory.BrandsFixtures
 
   describe "products" do
     alias Filamentory.Products.Product
@@ -15,7 +16,7 @@ alias Filamentory.BrandsFixtures
 
     test "list_products/0 returns all products" do
       product = product_fixture()
-      assert Enum.map(Products.list_products(), &(&1.id)) == [product.id]
+      assert Enum.map(Products.list_products(), & &1.id) == [product.id]
     end
 
     test "get_product!/1 returns the product with given id" do
@@ -24,11 +25,18 @@ alias Filamentory.BrandsFixtures
     end
 
     test "create_product/1 with valid data creates a product" do
-      brand = BrandsFixtures.brand_fixture()
-      material = MaterialsFixtures.material_fixture()
-      variant = VariantsFixtures.variant_fixture()
+      brand = brand_fixture()
+      material = material_fixture()
+      variant = variant_fixture()
 
-      valid_attrs = %{name: "some name", brand_id: brand.id, material_id: material.id, variant_id: variant.id, weight_grams: 1_000, spool_weight_grams: 250}
+      valid_attrs = %{
+        name: "some name",
+        brand_id: brand.id,
+        material_id: material.id,
+        variant_id: variant.id,
+        weight_grams: 1_000,
+        spool_weight_grams: 250
+      }
 
       assert {:ok, %Product{} = product} = Products.create_product(valid_attrs)
       assert product.name == "some name"

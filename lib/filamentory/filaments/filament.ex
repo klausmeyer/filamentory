@@ -22,10 +22,10 @@ defmodule Filamentory.Filaments.Filament do
     |> foreign_key_constraint(:product_id)
   end
 
-
-  defp build_name(%Ecto.Changeset{changes: %{product_id: product_id}} = changeset) when is_integer(product_id) do
+  defp build_name(%Ecto.Changeset{changes: %{product_id: product_id}} = changeset)
+       when is_integer(product_id) do
     product_name = Products.get_product!(product_id).name
-    color_name   = get_field(changeset, :color_name)
+    color_name = get_field(changeset, :color_name)
 
     put_change(changeset, :name, "#{product_name} - #{color_name}")
   end

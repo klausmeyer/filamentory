@@ -28,7 +28,8 @@ defmodule FilamentoryWeb.FilamentControllerTest do
 
   describe "create filament" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/filaments", filament: %{@create_attrs | product_id: product_fixture().id})
+      conn =
+        post(conn, ~p"/filaments", filament: %{@create_attrs | product_id: product_fixture().id})
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == ~p"/filaments/#{id}"

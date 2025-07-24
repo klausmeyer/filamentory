@@ -1,5 +1,5 @@
 defmodule Filamentory.SpoolsTest do
-alias Filamentory.FilamentsFixtures
+  alias Filamentory.FilamentsFixtures
   use Filamentory.DataCase
 
   alias Filamentory.Spools
@@ -13,7 +13,7 @@ alias Filamentory.FilamentsFixtures
 
     test "list_spools/0 returns all spools" do
       spool = spool_fixture()
-      assert Enum.map(Spools.list_spools(), &(&1.id)) == [spool.id]
+      assert Enum.map(Spools.list_spools(), & &1.id) == [spool.id]
     end
 
     test "get_spool!/1 returns the spool with given id" do
@@ -24,7 +24,13 @@ alias Filamentory.FilamentsFixtures
     test "create_spool/1 with valid data creates a spool" do
       filament = FilamentsFixtures.filament_fixture()
 
-      valid_attrs = %{filament_id: filament.id, comment: "some comment", ovp: true, refill_only: true, gross_weight_grams: 42}
+      valid_attrs = %{
+        filament_id: filament.id,
+        comment: "some comment",
+        ovp: true,
+        refill_only: true,
+        gross_weight_grams: 42
+      }
 
       assert {:ok, %Spool{} = spool} = Spools.create_spool(valid_attrs)
       assert spool.comment == "some comment"
@@ -39,7 +45,13 @@ alias Filamentory.FilamentsFixtures
 
     test "update_spool/2 with valid data updates the spool" do
       spool = spool_fixture()
-      update_attrs = %{comment: "some updated comment", ovp: false, refill_only: false, gross_weight_grams: 43}
+
+      update_attrs = %{
+        comment: "some updated comment",
+        ovp: false,
+        refill_only: false,
+        gross_weight_grams: 43
+      }
 
       assert {:ok, %Spool{} = spool} = Spools.update_spool(spool, update_attrs)
       assert spool.comment == "some updated comment"

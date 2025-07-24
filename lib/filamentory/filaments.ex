@@ -20,7 +20,7 @@ defmodule Filamentory.Filaments do
   def list_filaments do
     Filament
     |> order_by(asc: :id)
-    |> Repo.all
+    |> Repo.all()
     |> Repo.preload([:product])
   end
 

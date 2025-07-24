@@ -3,7 +3,13 @@
     Oops, something went wrong! Please check the errors below.
   </.error>
 
-  <.input label="Product" field={f[:product_id]} type="select" prompt="Please select ..." options={Filamentory.Products.list_products() |> Enum.map(&({&1.name, &1.id}))} />
+  <.input
+    label="Product"
+    field={f[:product_id]}
+    type="select"
+    prompt="Please select ..."
+    options={Filamentory.Products.list_products() |> Enum.map(&{&1.name, &1.id})}
+  />
 
   <.input field={f[:color_name]} type="text" label="Color name" />
 

@@ -12,5 +12,4 @@ defmodule FilamentoryWeb.SpoolHTML do
   attr :action, :string, required: true
 
   def spool_form(assigns)
-
 end

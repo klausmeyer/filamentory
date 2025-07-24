@@ -6,7 +6,14 @@ defmodule FilamentoryWeb.ProductControllerTest do
   import Filamentory.VariantsFixtures
   import Filamentory.ProductsFixtures
 
-  @create_attrs %{brand_id: nil, material_id: nil, variant_id: nil, name: "some name", weight_grams: 1_000, spool_weight_grams: 250}
+  @create_attrs %{
+    brand_id: nil,
+    material_id: nil,
+    variant_id: nil,
+    name: "some name",
+    weight_grams: 1_000,
+    spool_weight_grams: 250
+  }
   @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
 
@@ -30,7 +37,15 @@ defmodule FilamentoryWeb.ProductControllerTest do
 
   describe "create product" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/products", product: %{@create_attrs | brand_id: brand_fixture().id, material_id: material_fixture().id, variant_id: variant_fixture().id})
+      conn =
+        post(conn, ~p"/products",
+          product: %{
+            @create_attrs
+            | brand_id: brand_fixture().id,
+              material_id: material_fixture().id,
+              variant_id: variant_fixture().id
+          }
+        )
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == ~p"/products/#{id}"

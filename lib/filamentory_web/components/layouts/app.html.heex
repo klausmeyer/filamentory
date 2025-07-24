@@ -2,13 +2,65 @@
   <h1 class="my-4">Filamentory</h1>
 
   <ul class="list-disc">
-    <li><a data-active={@conn.request_path == "/"} class="data-[active]:font-bold" href={~p"/"}>Home</a></li>
-    <li><a data-active={String.starts_with?(@conn.request_path, ~p"/brands")} class="data-[active]:font-bold" href={~p"/brands"}>Brands</a></li>
-    <li><a data-active={String.starts_with?(@conn.request_path, ~p"/materials")} class="data-[active]:font-bold" href={~p"/materials"}>Materials</a></li>
-    <li><a data-active={String.starts_with?(@conn.request_path, ~p"/variants")} class="data-[active]:font-bold" href={~p"/variants"}>Variants</a></li>
-    <li><a data-active={String.starts_with?(@conn.request_path, ~p"/products")} class="data-[active]:font-bold" href={~p"/products"}>Products</a></li>
-    <li><a data-active={String.starts_with?(@conn.request_path, ~p"/filaments")} class="data-[active]:font-bold" href={~p"/filaments"}>Filaments</a></li>
-    <li><a data-active={String.starts_with?(@conn.request_path, ~p"/spools")} class="data-[active]:font-bold" href={~p"/spools"}>Spools</a></li>
+    <li>
+      <a data-active={@conn.request_path == "/"} class="data-[active]:font-bold" href={~p"/"}>
+        Home
+      </a>
+    </li>
+    <li>
+      <a
+        data-active={String.starts_with?(@conn.request_path, ~p"/brands")}
+        class="data-[active]:font-bold"
+        href={~p"/brands"}
+      >
+        Brands
+      </a>
+    </li>
+    <li>
+      <a
+        data-active={String.starts_with?(@conn.request_path, ~p"/materials")}
+        class="data-[active]:font-bold"
+        href={~p"/materials"}
+      >
+        Materials
+      </a>
+    </li>
+    <li>
+      <a
+        data-active={String.starts_with?(@conn.request_path, ~p"/variants")}
+        class="data-[active]:font-bold"
+        href={~p"/variants"}
+      >
+        Variants
+      </a>
+    </li>
+    <li>
+      <a
+        data-active={String.starts_with?(@conn.request_path, ~p"/products")}
+        class="data-[active]:font-bold"
+        href={~p"/products"}
+      >
+        Products
+      </a>
+    </li>
+    <li>
+      <a
+        data-active={String.starts_with?(@conn.request_path, ~p"/filaments")}
+        class="data-[active]:font-bold"
+        href={~p"/filaments"}
+      >
+        Filaments
+      </a>
+    </li>
+    <li>
+      <a
+        data-active={String.starts_with?(@conn.request_path, ~p"/spools")}
+        class="data-[active]:font-bold"
+        href={~p"/spools"}
+      >
+        Spools
+      </a>
+    </li>
   </ul>
 </header>
 <main class="px-8">

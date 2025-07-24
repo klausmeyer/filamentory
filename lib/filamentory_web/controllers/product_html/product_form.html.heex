@@ -3,11 +3,29 @@
     Oops, something went wrong! Please check the errors below.
   </.error>
 
-  <.input label="Brand" field={f[:brand_id]} type="select" prompt="Please select ..." options={Filamentory.Brands.list_brands() |> Enum.map(&({&1.name, &1.id}))} />
+  <.input
+    label="Brand"
+    field={f[:brand_id]}
+    type="select"
+    prompt="Please select ..."
+    options={Filamentory.Brands.list_brands() |> Enum.map(&{&1.name, &1.id})}
+  />
 
-  <.input label="Material" field={f[:material_id]} type="select" prompt="Please select ..." options={Filamentory.Materials.list_materials() |> Enum.map(&({&1.name, &1.id}))} />
+  <.input
+    label="Material"
+    field={f[:material_id]}
+    type="select"
+    prompt="Please select ..."
+    options={Filamentory.Materials.list_materials() |> Enum.map(&{&1.name, &1.id})}
+  />
 
-  <.input label="Variant" field={f[:variant_id]} type="select" prompt="Please select ..." options={Filamentory.Variants.list_variants() |> Enum.map(&({&1.name, &1.id}))} />
+  <.input
+    label="Variant"
+    field={f[:variant_id]}
+    type="select"
+    prompt="Please select ..."
+    options={Filamentory.Variants.list_variants() |> Enum.map(&{&1.name, &1.id})}
+  />
 
   <.input label="Name" field={f[:name]} type="text" />
 

@@ -13,7 +13,7 @@ defmodule Filamentory.FilamentsTest do
 
     test "list_filaments/0 returns all filaments" do
       filament = filament_fixture()
-      assert Enum.map(Filaments.list_filaments(), &(&1.id)) == [filament.id]
+      assert Enum.map(Filaments.list_filaments(), & &1.id) == [filament.id]
     end
 
     test "get_filament!/1 returns the filament with given id" do
@@ -24,7 +24,11 @@ defmodule Filamentory.FilamentsTest do
     test "create_filament/1 with valid data creates a filament" do
       product = ProductsFixtures.product_fixture()
 
-      valid_attrs = %{product_id: product.id, color_name: "some color_name", color_hex: "some color_hex"}
+      valid_attrs = %{
+        product_id: product.id,
+        color_name: "some color_name",
+        color_hex: "some color_hex"
+      }
 
       assert {:ok, %Filament{} = filament} = Filaments.create_filament(valid_attrs)
       assert filament.color_name == "some color_name"

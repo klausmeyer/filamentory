@@ -19,7 +19,7 @@ defmodule Filamentory.SpoolsFixtures do
         ovp: true,
         refill_only: true,
         gross_weight_grams: 420,
-        comment: "some comment",
+        comment: "some comment"
       })
       |> Filamentory.Spools.create_spool()
 

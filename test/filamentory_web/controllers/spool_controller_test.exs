@@ -4,8 +4,19 @@ defmodule FilamentoryWeb.SpoolControllerTest do
   import Filamentory.FilamentsFixtures
   import Filamentory.SpoolsFixtures
 
-  @create_attrs %{filament_id: nil, comment: "some comment", ovp: true, refill_only: true, gross_weight_grams: 42}
-  @update_attrs %{comment: "some updated comment", ovp: false, refill_only: false, gross_weight_grams: 43}
+  @create_attrs %{
+    filament_id: nil,
+    comment: "some comment",
+    ovp: true,
+    refill_only: true,
+    gross_weight_grams: 42
+  }
+  @update_attrs %{
+    comment: "some updated comment",
+    ovp: false,
+    refill_only: false,
+    gross_weight_grams: 43
+  }
   @invalid_attrs %{comment: nil, ovp: nil, refill_only: nil, gross_weight_grams: nil}
 
   describe "index" do
