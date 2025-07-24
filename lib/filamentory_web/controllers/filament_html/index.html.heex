@@ -11,16 +11,7 @@
   <:col :let={filament} label="Name">{filament.name}</:col>
   <:col :let={filament} label="Product">{filament.product.name}</:col>
   <:col :let={filament} label="Color hex">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      fill={filament.color_hex}
-      class="bi bi-square-fill"
-      viewBox="0 0 16 16"
-    >
-      <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z" />
-    </svg>
+    <.color_tile color={filament.color_hex} />
   </:col>
   <:col :let={filament} label="Color name">{filament.color_name}</:col>
   <:action :let={filament}>

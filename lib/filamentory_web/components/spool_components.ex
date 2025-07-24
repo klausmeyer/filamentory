@@ -20,15 +20,11 @@ defmodule FilamentoryWeb.SpoolComponents do
       end
 
     ~H"""
-    <div class="mb-1 text-base font-medium dark:text-white text-right">
+    <div class="mb-1 text-right">
       {@remaining_grams}g / {@weight_grams}g
     </div>
-    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
-      <div
-        class="bg-gray-600 h-2.5 rounded-full dark:bg-gray-300"
-        style={"width: #{@remaining_percent}%"}
-      >
-      </div>
+    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+      <div class="bg-gray-600 h-2.5 rounded-full" style={"width: #{@remaining_percent}%"}></div>
     </div>
     """
   end

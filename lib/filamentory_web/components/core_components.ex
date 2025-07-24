@@ -674,4 +674,26 @@ defmodule FilamentoryWeb.CoreComponents do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
+
+  def color_tile(%{color: color} = assigns) do
+    assigns = assign(assigns, color: color)
+
+    # ~H"""
+    # <svg
+    #   xmlns="http://www.w3.org/2000/svg"
+    #   width="32"
+    #   height="32"
+    #   fill={@color}
+    #   viewBox="0 0 16 16"
+    # >
+    #   < />
+    # </svg>
+    # """
+
+    ~H"""
+    <svg width="32" height="32">
+      <rect width="32" height="32" fill={@color} style="stroke-width: 1; stroke: black;" />
+    </svg>
+    """
+  end
 end

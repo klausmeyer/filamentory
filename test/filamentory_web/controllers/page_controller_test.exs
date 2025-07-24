@@ -3,6 +3,6 @@ defmodule FilamentoryWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Please select a resource above."
+    assert redirected_to(conn) == ~p"/spools"
   end
 end

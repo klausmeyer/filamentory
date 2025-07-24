@@ -18,7 +18,9 @@ defmodule Filamentory.Products do
 
   """
   def list_products do
-    Repo.all(Product)
+    Product
+    |> order_by([{:asc, :name}, {:asc, :id}])
+    |> Repo.all()
     |> Repo.preload([:brand, :material, :variant])
   end
 

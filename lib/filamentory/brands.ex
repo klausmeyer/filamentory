@@ -18,7 +18,9 @@ defmodule Filamentory.Brands do
 
   """
   def list_brands do
-    Repo.all(Brand)
+    Brand
+    |> order_by(asc: :name)
+    |> Repo.all()
   end
 
   @doc """
