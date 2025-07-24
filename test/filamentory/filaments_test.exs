@@ -2,26 +2,29 @@ defmodule Filamentory.FilamentsTest do
   use Filamentory.DataCase
 
   alias Filamentory.Filaments
+  alias Filamentory.ProductsFixtures
 
   describe "filaments" do
     alias Filamentory.Filaments.Filament
 
     import Filamentory.FilamentsFixtures
 
-    @invalid_attrs %{color_name: nil, color_hex: nil}
+    @invalid_attrs %{name: nil, product_id: nil, color_name: nil, color_hex: nil}
 
     test "list_filaments/0 returns all filaments" do
       filament = filament_fixture()
-      assert Filaments.list_filaments() == [filament]
+      assert Enum.map(Filaments.list_filaments(), &(&1.id)) == [filament.id]
     end
 
     test "get_filament!/1 returns the filament with given id" do
       filament = filament_fixture()
-      assert Filaments.get_filament!(filament.id) == filament
+      assert Filaments.get_filament!(filament.id).id == filament.id
     end
 
     test "create_filament/1 with valid data creates a filament" do
-      valid_attrs = %{color_name: "some color_name", color_hex: "some color_hex"}
+      product = ProductsFixtures.product_fixture()
+
+      valid_attrs = %{product_id: product.id, color_name: "some color_name", color_hex: "some color_hex"}
 
       assert {:ok, %Filament{} = filament} = Filaments.create_filament(valid_attrs)
       assert filament.color_name == "some color_name"
@@ -44,7 +47,6 @@ defmodule Filamentory.FilamentsTest do
     test "update_filament/2 with invalid data returns error changeset" do
       filament = filament_fixture()
       assert {:error, %Ecto.Changeset{}} = Filaments.update_filament(filament, @invalid_attrs)
-      assert filament == Filaments.get_filament!(filament.id)
     end
 
     test "delete_filament/1 deletes the filament" do

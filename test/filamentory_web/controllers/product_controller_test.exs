@@ -1,11 +1,18 @@
 defmodule FilamentoryWeb.ProductControllerTest do
   use FilamentoryWeb.ConnCase
 
+  import Filamentory.BrandsFixtures
+  import Filamentory.MaterialsFixtures
+  import Filamentory.VariantsFixtures
   import Filamentory.ProductsFixtures
 
-  @create_attrs %{name: "some name"}
+  @create_attrs %{brand_id: nil, material_id: nil, variant_id: nil, name: "some name", weight_grams: 1_000, spool_weight_grams: 250}
   @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
+
+  setup do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Filamentory.Repo)
+  end
 
   describe "index" do
     test "lists all products", %{conn: conn} do
@@ -23,7 +30,7 @@ defmodule FilamentoryWeb.ProductControllerTest do
 
   describe "create product" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/products", product: @create_attrs)
+      conn = post(conn, ~p"/products", product: %{@create_attrs | brand_id: brand_fixture().id, material_id: material_fixture().id, variant_id: variant_fixture().id})
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == ~p"/products/#{id}"

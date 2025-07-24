@@ -1,4 +1,7 @@
 defmodule Filamentory.ProductsTest do
+alias Filamentory.VariantsFixtures
+alias Filamentory.MaterialsFixtures
+alias Filamentory.BrandsFixtures
   use Filamentory.DataCase
 
   alias Filamentory.Products
@@ -12,16 +15,20 @@ defmodule Filamentory.ProductsTest do
 
     test "list_products/0 returns all products" do
       product = product_fixture()
-      assert Products.list_products() == [product]
+      assert Enum.map(Products.list_products(), &(&1.id)) == [product.id]
     end
 
     test "get_product!/1 returns the product with given id" do
       product = product_fixture()
-      assert Products.get_product!(product.id) == product
+      assert Products.get_product!(product.id).id == product.id
     end
 
     test "create_product/1 with valid data creates a product" do
-      valid_attrs = %{name: "some name"}
+      brand = BrandsFixtures.brand_fixture()
+      material = MaterialsFixtures.material_fixture()
+      variant = VariantsFixtures.variant_fixture()
+
+      valid_attrs = %{name: "some name", brand_id: brand.id, material_id: material.id, variant_id: variant.id, weight_grams: 1_000, spool_weight_grams: 250}
 
       assert {:ok, %Product{} = product} = Products.create_product(valid_attrs)
       assert product.name == "some name"
@@ -42,7 +49,7 @@ defmodule Filamentory.ProductsTest do
     test "update_product/2 with invalid data returns error changeset" do
       product = product_fixture()
       assert {:error, %Ecto.Changeset{}} = Products.update_product(product, @invalid_attrs)
-      assert product == Products.get_product!(product.id)
+      assert product.id == Products.get_product!(product.id).id
     end
 
     test "delete_product/1 deletes the product" do

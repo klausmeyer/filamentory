@@ -1,9 +1,10 @@
 defmodule FilamentoryWeb.SpoolControllerTest do
   use FilamentoryWeb.ConnCase
 
+  import Filamentory.FilamentsFixtures
   import Filamentory.SpoolsFixtures
 
-  @create_attrs %{comment: "some comment", ovp: true, refill_only: true, gross_weight_grams: 42}
+  @create_attrs %{filament_id: nil, comment: "some comment", ovp: true, refill_only: true, gross_weight_grams: 42}
   @update_attrs %{comment: "some updated comment", ovp: false, refill_only: false, gross_weight_grams: 43}
   @invalid_attrs %{comment: nil, ovp: nil, refill_only: nil, gross_weight_grams: nil}
 
@@ -23,7 +24,7 @@ defmodule FilamentoryWeb.SpoolControllerTest do
 
   describe "create spool" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/spools", spool: @create_attrs)
+      conn = post(conn, ~p"/spools", spool: %{@create_attrs | filament_id: filament_fixture().id})
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == ~p"/spools/#{id}"

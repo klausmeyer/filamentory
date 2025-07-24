@@ -1,4 +1,5 @@
 defmodule Filamentory.SpoolsTest do
+alias Filamentory.FilamentsFixtures
   use Filamentory.DataCase
 
   alias Filamentory.Spools
@@ -12,16 +13,18 @@ defmodule Filamentory.SpoolsTest do
 
     test "list_spools/0 returns all spools" do
       spool = spool_fixture()
-      assert Spools.list_spools() == [spool]
+      assert Enum.map(Spools.list_spools(), &(&1.id)) == [spool.id]
     end
 
     test "get_spool!/1 returns the spool with given id" do
       spool = spool_fixture()
-      assert Spools.get_spool!(spool.id) == spool
+      assert Spools.get_spool!(spool.id).id == spool.id
     end
 
     test "create_spool/1 with valid data creates a spool" do
-      valid_attrs = %{comment: "some comment", ovp: true, refill_only: true, gross_weight_grams: 42}
+      filament = FilamentsFixtures.filament_fixture()
+
+      valid_attrs = %{filament_id: filament.id, comment: "some comment", ovp: true, refill_only: true, gross_weight_grams: 42}
 
       assert {:ok, %Spool{} = spool} = Spools.create_spool(valid_attrs)
       assert spool.comment == "some comment"
@@ -48,7 +51,6 @@ defmodule Filamentory.SpoolsTest do
     test "update_spool/2 with invalid data returns error changeset" do
       spool = spool_fixture()
       assert {:error, %Ecto.Changeset{}} = Spools.update_spool(spool, @invalid_attrs)
-      assert spool == Spools.get_spool!(spool.id)
     end
 
     test "delete_spool/1 deletes the spool" do

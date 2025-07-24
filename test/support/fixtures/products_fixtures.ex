@@ -4,6 +4,10 @@ defmodule Filamentory.ProductsFixtures do
   entities via the `Filamentory.Products` context.
   """
 
+  alias Filamentory.BrandsFixtures
+  alias Filamentory.MaterialsFixtures
+  alias Filamentory.VariantsFixtures
+
   @doc """
   Generate a unique product name.
   """
@@ -13,10 +17,19 @@ defmodule Filamentory.ProductsFixtures do
   Generate a product.
   """
   def product_fixture(attrs \\ %{}) do
+    brand = BrandsFixtures.brand_fixture()
+    material = MaterialsFixtures.material_fixture()
+    variant = VariantsFixtures.variant_fixture()
+
     {:ok, product} =
       attrs
       |> Enum.into(%{
-        name: unique_product_name()
+        name: unique_product_name(),
+        brand_id: brand.id,
+        material_id: material.id,
+        variant_id: variant.id,
+        weight_grams: 1_000,
+        spool_weight_grams: 250
       })
       |> Filamentory.Products.create_product()
 

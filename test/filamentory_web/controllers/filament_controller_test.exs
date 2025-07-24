@@ -2,10 +2,15 @@ defmodule FilamentoryWeb.FilamentControllerTest do
   use FilamentoryWeb.ConnCase
 
   import Filamentory.FilamentsFixtures
+  import Filamentory.ProductsFixtures
 
-  @create_attrs %{color_name: "some color_name", color_hex: "some color_hex"}
+  @create_attrs %{product_id: nil, color_name: "some color_name", color_hex: "some color_hex"}
   @update_attrs %{color_name: "some updated color_name", color_hex: "some updated color_hex"}
   @invalid_attrs %{color_name: nil, color_hex: nil}
+
+  setup do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Filamentory.Repo)
+  end
 
   describe "index" do
     test "lists all filaments", %{conn: conn} do
@@ -23,7 +28,7 @@ defmodule FilamentoryWeb.FilamentControllerTest do
 
   describe "create filament" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/filaments", filament: @create_attrs)
+      conn = post(conn, ~p"/filaments", filament: %{@create_attrs | product_id: product_fixture().id})
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == ~p"/filaments/#{id}"
