@@ -3,8 +3,8 @@ defmodule Filamentory.Repo.Migrations.CreateSpools do
 
   def change do
     create table(:spools) do
-      add :filament_id, references(:filaments, on_delete: :nothing)
       add :name, :string
+      add :filament_id, references(:filaments, on_delete: :nothing)
       add :ovp, :boolean, default: false, null: false
       add :refill_only, :boolean, default: false, null: false
       add :gross_weight_grams, :integer

@@ -8,7 +8,7 @@
 </.header>
 
 <.table id="spools" rows={@spools} row_click={&JS.navigate(~p"/spools/#{&1}")}>
-  <:col :let={spool} label="Filament">{spool.filament.name}</:col>
+  <:col :let={spool} label="Name">{spool.name}</:col>
   <:col :let={spool} label="Color">
     <.color_tile color={spool.filament.color_hex} />
   </:col>

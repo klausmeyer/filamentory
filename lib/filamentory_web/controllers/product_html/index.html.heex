@@ -8,10 +8,10 @@
 </.header>
 
 <.table id="products" rows={@products} row_click={&JS.navigate(~p"/products/#{&1}")}>
+  <:col :let={product} label="Name">{product.name}</:col>
   <:col :let={product} label="Brand">{product.brand.name}</:col>
   <:col :let={product} label="Material">{product.material.name}</:col>
   <:col :let={product} label="Variant">{product.variant.name}</:col>
-  <:col :let={product} label="Name">{product.name}</:col>
   <:col :let={product} label="Weight (g)">{product.weight_grams}</:col>
   <:col :let={product} label="Spool Weight (g)">{product.spool_weight_grams}</:col>
   <:action :let={product}>
