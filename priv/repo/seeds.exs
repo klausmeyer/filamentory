@@ -192,18 +192,22 @@ Repo.insert!(
   })
 )
 
-Repo.insert!(%Spool{
-  filament: bambu_pla_basic_black,
-  ovp: false,
-  refill_only: false,
-  gross_weight_grams: 714,
-  comment: nil
-})
+Repo.insert!(
+  Spool.changeset(%Spool{}, %{
+    filament_id: bambu_pla_basic_black.id,
+    ovp: false,
+    refill_only: false,
+    gross_weight_grams: 714,
+    comment: nil
+  })
+)
 
-Repo.insert!(%Spool{
-  filament: bambu_pla_basic_grey,
-  ovp: true,
-  refill_only: false,
-  gross_weight_grams: nil,
-  comment: nil
-})
+Repo.insert!(
+  Spool.changeset(%Spool{}, %{
+    filament_id: bambu_pla_basic_grey.id,
+    ovp: true,
+    refill_only: false,
+    gross_weight_grams: nil,
+    comment: nil
+  })
+)
