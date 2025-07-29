@@ -20,6 +20,7 @@
     <.icon :if={spool.refill_only} name="hero-check-solid" class="text-green-500" />
     <span :if={!spool.refill_only}>-</span>
   </:col>
+  <:col :let={spool} label="Last update">{spool.updated_at}</:col>
   <:col :let={spool} label="Gross weight">
     {(spool.gross_weight_grams && "#{spool.gross_weight_grams}g") || "-"}
   </:col>
