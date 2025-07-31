@@ -14,5 +14,12 @@
         "ARG [^\\s]+=\"(?<currentValue>[^\\s]+)\" # renovate: image=(?<depName>[^\\s]+)\\n"
       ]
     }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["debian"],
+      "versioning": "loose"
+    }
   ]
 }
