@@ -11,7 +11,7 @@
         "^Dockerfile$"
       ],
       "matchStrings": [
-        "ARG [^\\s]+=\"([^\\s]+)\" # renovate: image=([^\\s]+)\\n"
+        "ARG [^\\s]+=\"(?<currentValue>[^\\s]+)\" # renovate: image=(?<depName>[^\\s]+)\\n"
       ]
     }
   ]
