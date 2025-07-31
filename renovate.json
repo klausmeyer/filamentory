@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "docker",
+      "fileMatch": [
+        "^Dockerfile$"
+      ],
+      "matchStrings": [
+        "ARG [^\\s]+=\"([^\\s]+)\" # renovate: image=([^\\s]+)\\n"
+      ]
+    }
+  ]
+}
