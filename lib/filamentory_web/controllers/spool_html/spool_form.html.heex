@@ -11,9 +11,9 @@
     options={Filamentory.Filaments.list_filaments() |> Enum.map(&{&1.name, &1.id})}
   />
 
-  <.input field={f[:ovp]} type="checkbox" label="Ovp" />
+  <.input field={f[:ovp]} type="checkbox" label="OVP?" />
 
-  <.input field={f[:refill_only]} type="checkbox" label="Refill only" />
+  <.input field={f[:refill_only]} type="checkbox" label="Refill only?" />
 
   <.input field={f[:gross_weight_grams]} type="number" label="Gross weight grams" />
 

@@ -10,10 +10,23 @@
 
 <.list>
   <:item title="Filament">{@spool.filament.name}</:item>
-  <:item title="Ovp?">{@spool.ovp}</:item>
-  <:item title="Refill only?">{@spool.refill_only}</:item>
-  <:item title="Gross weight grams">{@spool.gross_weight_grams}</:item>
-  <:item title="Comment">{@spool.comment}</:item>
+  color
+  <:item title="OVP?">
+    <.icon :if={@spool.ovp} name="hero-check-solid" class="text-green-500" />
+    <span :if={!@spool.ovp}>-</span>
+  </:item>
+  <:item title="Refill only?">
+    <.icon :if={@spool.refill_only} name="hero-check-solid" class="text-green-500" />
+    <span :if={!@spool.refill_only}>-</span>
+  </:item>
+  <:item title="Last update">{@spool.updated_at}</:item>
+  <:item title="Gross weight grams">
+    {number_to_si(@spool.gross_weight_grams, unit: "g", trim: true)}
+  </:item>
+  <:item title="Net weight">
+    <div class="w-48"><.progress_bar spool={@spool} /></div>
+  </:item>
+  <:item title="Comment">{@spool.comment || "-"}</:item>
 </.list>
 
 <.back navigate={~p"/spools"}>Back to spools</.back>

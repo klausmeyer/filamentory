@@ -1,6 +1,7 @@
 defmodule FilamentoryWeb.SpoolHTML do
   use FilamentoryWeb, :html
 
+  import Number.SI
   import FilamentoryWeb.SpoolComponents
 
   embed_templates "spool_html/*"
