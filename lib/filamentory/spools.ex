@@ -40,7 +40,7 @@ defmodule Filamentory.Spools do
   """
   def get_spool!(id) do
     Repo.get!(Spool, id)
-    |> Repo.preload([:filament])
+    |> Repo.preload(filament: :product)
   end
 
   @doc """
@@ -106,5 +106,18 @@ defmodule Filamentory.Spools do
   """
   def change_spool(%Spool{} = spool, attrs \\ %{}) do
     Spool.changeset(spool, attrs)
+  end
+
+  @doc """
+  Returns the sum of all remaining_weight_grams columns
+
+  ## Examples
+
+      iex> remaining_weight_grams()
+      420
+
+  """
+  def get_total_grams_remaining() do
+    Repo.one(from s in "spools", select: sum(s.remaining_weight_grams))
   end
 end
