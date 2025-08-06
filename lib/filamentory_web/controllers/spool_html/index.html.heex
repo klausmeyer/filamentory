@@ -1,5 +1,5 @@
 <.header>
-  Listing Spools ({number_to_si(@total_grams, unit: "g", trim: true)} total)
+  Listing Spools ({number_to_si(@total_grams, unit: "g")} total)
   <:actions>
     <.link href={~p"/spools/new"}>
       <.button>New Spool</.button>
@@ -22,8 +22,12 @@
   </:col>
   <:col :let={spool} label="Last update">{spool.updated_at}</:col>
   <:col :let={spool} label="Gross weight">
-    {(spool.gross_weight_grams && number_to_si(spool.gross_weight_grams, unit: "g", trim: true)) ||
-      "-"}
+    <div class="mb-1 text-right">
+      <span :if={spool.gross_weight_grams}>
+        {number_to_si(spool.gross_weight_grams, unit: "g")}
+      </span>
+      <span :if={!spool.gross_weight_grams}>-</span>
+    </div>
   </:col>
   <:col :let={spool} label="Net weight">
     <.progress_bar spool={spool} />
