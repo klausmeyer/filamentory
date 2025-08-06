@@ -21,7 +21,7 @@
   </:item>
   <:item title="Last update">{@spool.updated_at}</:item>
   <:item title="Gross weight grams">
-    {number_to_si(@spool.gross_weight_grams, unit: "g", trim: true)}
+    {number_to_si(@spool.gross_weight_grams, unit: "g")}
   </:item>
   <:item title="Net weight">
     <div class="w-48"><.progress_bar spool={@spool} /></div>

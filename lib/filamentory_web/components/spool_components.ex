@@ -21,10 +21,8 @@ defmodule FilamentoryWeb.SpoolComponents do
 
     ~H"""
     <div class="mb-1 text-right">
-      {number_to_si(@spool.remaining_weight_grams, unit: "g", trim: true)} / {number_to_si(
-        @weight_grams,
-        unit: "g",
-        trim: true
+      {number_to_si(@spool.remaining_weight_grams, unit: "g")} / {number_to_si(@weight_grams,
+        unit: "g"
       )}
     </div>
     <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">

@@ -3,6 +3,14 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "elixir",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "vim"
+    }
+  },
+  "containerEnv": {
+    "GIT_EDITOR": "vim"
+  },
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.
