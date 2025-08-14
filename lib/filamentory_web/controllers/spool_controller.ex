@@ -6,7 +6,7 @@ defmodule FilamentoryWeb.SpoolController do
 
   def index(conn, _params) do
     spools = Spools.list_spools()
-    render(conn, :index, spools: spools, total_grams: Spools.get_total_grams_remaining())
+    render(conn, :index, spools: spools, stats: Spools.get_stats())
   end
 
   def new(conn, _params) do

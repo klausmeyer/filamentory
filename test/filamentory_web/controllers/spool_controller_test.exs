@@ -22,7 +22,7 @@ defmodule FilamentoryWeb.SpoolControllerTest do
   describe "index" do
     test "lists all spools", %{conn: conn} do
       conn = get(conn, ~p"/spools")
-      assert html_response(conn, 200) =~ "Listing Spools"
+      assert html_response(conn, 200) =~ "Listing 0 Spools"
     end
   end
 
