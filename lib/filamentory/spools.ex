@@ -109,15 +109,24 @@ defmodule Filamentory.Spools do
   end
 
   @doc """
-  Returns the sum of all remaining_weight_grams columns
+  Returns some stats about the available spools
 
   ## Examples
 
-      iex> remaining_weight_grams()
-      420
+      iex> get_stats()
+      %{number_spools: 2, total_grams: 420}
 
   """
-  def get_total_grams_remaining() do
-    Repo.one(from s in "spools", select: sum(s.remaining_weight_grams))
+  def get_stats() do
+    [number_spools, total_grams] =
+      Repo.one(
+        from s in "spools",
+          select: [
+            count(s.id),
+            sum(s.remaining_weight_grams)
+          ]
+      )
+
+    %{number_spools: number_spools, total_grams: total_grams}
   end
 end
