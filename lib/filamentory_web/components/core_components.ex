@@ -455,6 +455,7 @@ defmodule FilamentoryWeb.CoreComponents do
   attr :rows, :list, required: true
   attr :row_id, :any, default: nil, doc: "the function for generating the row id"
   attr :row_click, :any, default: nil, doc: "the function for handling phx-click on each row"
+  attr :sort_by, :string, default: nil
   attr :sort_order, :string, default: "asc"
 
   attr :row_item, :any,
@@ -487,16 +488,13 @@ defmodule FilamentoryWeb.CoreComponents do
                   href={"?sort_by=#{col[:sort_field]}&sort_order=#{if @sort_order == "asc", do: "desc", else: "asc"}"}
                   class="flex items-center"
                 >
-                  {col[:label]}
-                  <svg
-                    class="w-3 h-3 ms-1.5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                  </svg>
+                  {col[:label]} &nbsp;
+                  <%= if @sort_by == col[:sort_field] do %>
+                    <.icon :if={@sort_order == "asc"} name="hero-chevron-up-solid" class="size-4" />
+                    <.icon :if={@sort_order == "desc"} name="hero-chevron-down-solid" class="size-4" />
+                  <% else %>
+                    <.icon name="hero-chevron-up-down-solid" class="size-4" />
+                  <% end %>
                 </a>
               <% else %>
                 {col[:label]}
@@ -698,11 +696,14 @@ defmodule FilamentoryWeb.CoreComponents do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
 
+  attr :color, :string, required: true
+  attr :class, :string, default: nil
+
   def color_tile(%{color: color} = assigns) do
     assigns = assign(assigns, color: color)
 
     ~H"""
-    <svg width="32" height="32">
+    <svg width="32" height="32" class={@class}>
       <rect width="32" height="32" fill={@color} style="stroke-width: 1; stroke: black;" />
     </svg>
     """
