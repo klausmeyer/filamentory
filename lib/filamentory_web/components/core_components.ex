@@ -455,6 +455,8 @@ defmodule FilamentoryWeb.CoreComponents do
   attr :rows, :list, required: true
   attr :row_id, :any, default: nil, doc: "the function for generating the row id"
   attr :row_click, :any, default: nil, doc: "the function for handling phx-click on each row"
+  attr :sort_by, :string, default: nil
+  attr :sort_order, :string, default: "asc"
 
   attr :row_item, :any,
     default: &Function.identity/1,
@@ -463,6 +465,8 @@ defmodule FilamentoryWeb.CoreComponents do
   slot :col, required: true do
     attr :label, :string
     attr :class, :string
+
+    attr :sort_field, :string
   end
 
   slot :action, doc: "the slot for showing user actions in the last table column"
@@ -478,7 +482,24 @@ defmodule FilamentoryWeb.CoreComponents do
       <table class="w-[40rem] mt-11 sm:w-full">
         <thead class="text-sm text-left leading-6 text-zinc-500">
           <tr>
-            <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal">{col[:label]}</th>
+            <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal uppercase">
+              <%= if col[:sort_field] do %>
+                <a
+                  href={"?sort_by=#{col[:sort_field]}&sort_order=#{if @sort_order == "asc", do: "desc", else: "asc"}"}
+                  class="flex items-center"
+                >
+                  {col[:label]} &nbsp;
+                  <%= if @sort_by == col[:sort_field] do %>
+                    <.icon :if={@sort_order == "asc"} name="hero-chevron-up-solid" class="size-4" />
+                    <.icon :if={@sort_order == "desc"} name="hero-chevron-down-solid" class="size-4" />
+                  <% else %>
+                    <.icon name="hero-chevron-up-down-solid" class="size-4" />
+                  <% end %>
+                </a>
+              <% else %>
+                {col[:label]}
+              <% end %>
+            </th>
             <th :if={@action != []} class="relative p-0 pb-4">
               <span class="sr-only">{gettext("Actions")}</span>
             </th>
@@ -675,11 +696,14 @@ defmodule FilamentoryWeb.CoreComponents do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
 
+  attr :color, :string, required: true
+  attr :class, :string, default: nil
+
   def color_tile(%{color: color} = assigns) do
     assigns = assign(assigns, color: color)
 
     ~H"""
-    <svg width="32" height="32">
+    <svg width="32" height="32" class={@class}>
       <rect width="32" height="32" fill={@color} style="stroke-width: 1; stroke: black;" />
     </svg>
     """

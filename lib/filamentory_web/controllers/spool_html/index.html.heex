@@ -7,21 +7,29 @@
   </:actions>
 </.header>
 
-<.table id="spools" rows={@spools} row_click={&JS.navigate(~p"/spools/#{&1}")}>
-  <:col :let={spool} label="Name">{spool.name}</:col>
-  <:col :let={spool} label="Color">
-    <.color_tile color={spool.filament.color_hex} />
+<.table
+  id="spools"
+  rows={@spools}
+  row_click={&JS.navigate(~p"/spools/#{&1}")}
+  sort_by={@params["sort_by"] || "name"}
+  sort_order={@params["sort_order"] || "asc"}
+>
+  <:col :let={spool} sort_field="name" label="Name">
+    <div class="flex">
+      <.color_tile color={spool.filament.color_hex} class="mr-3" />
+      {spool.name}
+    </div>
   </:col>
-  <:col :let={spool} label="OVP?">
+  <:col :let={spool} sort_field="ovp" label="OVP?">
     <.icon :if={spool.ovp} name="hero-check-solid" class="text-green-500" />
     <span :if={!spool.ovp}>-</span>
   </:col>
-  <:col :let={spool} label="Refill only?">
+  <:col :let={spool} sort_field="refill_only" label="Refill only?">
     <.icon :if={spool.refill_only} name="hero-check-solid" class="text-green-500" />
     <span :if={!spool.refill_only}>-</span>
   </:col>
-  <:col :let={spool} label="Last update">{spool.updated_at}</:col>
-  <:col :let={spool} label="Gross weight">
+  <:col :let={spool} sort_field="updated_at" label="Last update">{spool.updated_at}</:col>
+  <:col :let={spool} sort_field="gross_weight_grams" label="Gross weight">
     <div class="mb-1 text-right">
       <span :if={spool.gross_weight_grams}>
         {number_to_si(spool.gross_weight_grams, unit: "g")}
@@ -29,7 +37,7 @@
       <span :if={!spool.gross_weight_grams}>-</span>
     </div>
   </:col>
-  <:col :let={spool} label="Net weight">
+  <:col :let={spool} sort_field="remaining_weight_grams" label="Net weight">
     <.progress_bar spool={spool} />
   </:col>
   <:action :let={spool}>
