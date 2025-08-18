@@ -4,9 +4,14 @@ defmodule FilamentoryWeb.SpoolController do
   alias Filamentory.Spools
   alias Filamentory.Spools.Spool
 
-  def index(conn, _params) do
-    spools = Spools.list_spools()
-    render(conn, :index, spools: spools, stats: Spools.get_stats())
+  def index(conn, params) do
+    spools =
+      Spools.list_spools(
+        String.to_atom(params["sort_by"] || "name"),
+        String.to_atom(params["sort_order"] || "asc")
+      )
+
+    render(conn, :index, params: params, spools: spools, stats: Spools.get_stats())
   end
 
   def new(conn, _params) do

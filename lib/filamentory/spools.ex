@@ -17,9 +17,18 @@ defmodule Filamentory.Spools do
       [%Spool{}, ...]
 
   """
-  def list_spools do
+  def list_spools(sort_by \\ :name, sort_order \\ :asc)
+      when sort_by in [
+             :id,
+             :name,
+             :ovp,
+             :refill_only,
+             :updated_at,
+             :gross_weight_grams,
+             :remaining_weight_grams
+           ] and sort_order in [:asc, :desc] do
     Spool
-    |> order_by([{:asc, :name}, {:asc, :ovp}])
+    |> order_by([{^sort_order, ^sort_by}, {:asc, :name}, {:asc, :ovp}, {:asc, :id}])
     |> Repo.all()
     |> Repo.preload(filament: :product)
   end
