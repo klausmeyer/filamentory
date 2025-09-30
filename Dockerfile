@@ -1,6 +1,6 @@
 ARG ELIXIR_VERSION="1.18.4" # renovate: image=elixir
 ARG ERLANG_VERSION="28.1" # renovate: image=erlang
-ARG DEBIAN_VERSION="bookworm-20250929-slim" # renovate: image=debian
+ARG DEBIAN_VERSION="trixie-20250929-slim" # renovate: image=debian
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${ERLANG_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
@@ -55,7 +55,7 @@ RUN mix release
 FROM ${RUNNER_IMAGE}
 
 RUN apt-get update -y && \
-  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates \
+  apt-get install -y libstdc++6 openssl libncurses6 locales ca-certificates \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
