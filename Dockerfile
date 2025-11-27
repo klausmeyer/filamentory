@@ -1,5 +1,5 @@
 ARG ELIXIR_VERSION="1.19.3" # renovate: image=elixir
-ARG ERLANG_VERSION="28.1" # renovate: image=erlang
+ARG ERLANG_VERSION="28.2" # renovate: image=erlang
 ARG DEBIAN_VERSION="trixie-20251117-slim" # renovate: image=debian
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${ERLANG_VERSION}-debian-${DEBIAN_VERSION}"
