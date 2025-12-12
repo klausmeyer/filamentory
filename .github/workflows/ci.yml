@@ -36,7 +36,7 @@ jobs:
       uses: erlef/setup-beam@e6d7c94229049569db56a7ad5a540c051a010af9 # v1.20.4
       with:
         elixir-version: "1.19.4"
-        otp-version: "28.2"
+        otp-version: "28.3"
     - name: Restore dependencies cache
       uses: actions/cache@v4
       with:
