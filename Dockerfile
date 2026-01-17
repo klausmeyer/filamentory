@@ -1,4 +1,4 @@
-ARG ELIXIR_VERSION="1.19.4" # renovate: image=elixir
+ARG ELIXIR_VERSION="1.19.5" # renovate: image=elixir
 ARG ERLANG_VERSION="28.3" # renovate: image=erlang
 ARG DEBIAN_VERSION="trixie-20260112-slim" # renovate: image=debian
 
