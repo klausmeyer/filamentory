@@ -1,4 +1,6 @@
-FROM elixir:1.19.5
+ARG ELIXIR_VERSION="latest"
+
+FROM elixir:${ELIXIR_VERSION}
 
 ARG USERNAME=vscode
 ARG USER_UID=1000

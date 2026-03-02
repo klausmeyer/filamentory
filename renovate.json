@@ -3,18 +3,6 @@
   "extends": [
     "config:recommended"
   ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "datasourceTemplate": "docker",
-      "fileMatch": [
-        "^Dockerfile$"
-      ],
-      "matchStrings": [
-        "ARG [^\\s]+=\"(?<currentValue>[^\\s]+)\" # renovate: image=(?<depName>[^\\s]+)\\n"
-      ]
-    }
-  ],
   "packageRules": [
     {
       "matchDatasources": ["docker"],

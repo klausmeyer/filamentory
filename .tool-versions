@@ -1,0 +1,3 @@
+erlang 28.3 # renovate: image=erlang
+elixir 1.19.5 # renovate: image=elixir
+debian trixie-20260223-slim # renovate: image=debian
