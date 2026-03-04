@@ -80,7 +80,7 @@ jobs:
         run: |
           awk '{ print toupper($1) "_VERSION=" $2 }' < .tool-versions >> $GITHUB_ENV
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
         with:
           image: tonistiigi/binfmt:qemu-v9.2.2-52
       - name: Set up Docker Buildx
