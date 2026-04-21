@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  brand: one
+  material: one
+  variant: one
+  spool_weight_grams: 1
+  weight_grams: 1
+
+two:
+  name: MyString
+  brand: two
+  material: two
+  variant: two
+  spool_weight_grams: 1
+  weight_grams: 1

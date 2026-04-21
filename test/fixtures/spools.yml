@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  filament: one
+  ovp: false
+  refill_only: false
+  gross_weight_grams: 1
+  remaining_weight_grams: 1
+  comment: MyString
+
+two:
+  filament: two
+  ovp: false
+  refill_only: false
+  gross_weight_grams: 1
+  remaining_weight_grams: 1
+  comment: MyString
