@@ -20,4 +20,3 @@ module DeleteRestrictionHandling
     end
   end
 end
-

@@ -101,28 +101,28 @@ bambu_pla_basic_black = filament_for.call(product: bambu_pla_basic, color_name: 
 bambu_pla_basic_grey = filament_for.call(product: bambu_pla_basic, color_name: "Grey", color_hex: "#c2c2c2")
 
 [
-  ["Ash Grey", "#909396"],
-  ["Charcoal", "#000000"],
-  ["Dark Red", "#b2353b"],
-  ["Ivory White", "#ffffff"],
-  ["Mandarin Orange", "#f88d58"],
-  ["Marine Blue", "#006eb7"]
+  [ "Ash Grey", "#909396" ],
+  [ "Charcoal", "#000000" ],
+  [ "Dark Red", "#b2353b" ],
+  [ "Ivory White", "#ffffff" ],
+  [ "Mandarin Orange", "#f88d58" ],
+  [ "Marine Blue", "#006eb7" ]
 ].each do |(color_name, color_hex)|
   filament_for.call(product: bambu_pla_matte, color_name: color_name, color_hex: color_hex)
 end
 
 [
-  ["Black", "#000000"],
-  ["Dark Blue", "#2240af"],
-  ["Neon Green", "#08e327"],
-  ["Translucent", "#f3f3f3"]
+  [ "Black", "#000000" ],
+  [ "Dark Blue", "#2240af" ],
+  [ "Neon Green", "#08e327" ],
+  [ "Translucent", "#f3f3f3" ]
 ].each do |(color_name, color_hex)|
   filament_for.call(product: elegoo_pla_basic, color_name: color_name, color_hex: color_hex)
 end
 
 [
-  ["Red", "#ea140e"],
-  ["White", "#ffffff"]
+  [ "Red", "#ea140e" ],
+  [ "White", "#ffffff" ]
 ].each do |(color_name, color_hex)|
   filament_for.call(product: elegoo_rapid_petg, color_name: color_name, color_hex: color_hex)
 end

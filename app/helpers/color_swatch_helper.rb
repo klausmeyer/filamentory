@@ -10,4 +10,3 @@ module ColorSwatchHelper
     )
   end
 end
-

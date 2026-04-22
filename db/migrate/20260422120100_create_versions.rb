@@ -17,4 +17,3 @@ class CreateVersions < ActiveRecord::Migration[8.1]
     add_index :versions, :whodunnit
   end
 end
-

@@ -6,8 +6,8 @@ class Spool < ApplicationRecord
   before_validation :sync_remaining_weight_grams
 
   validates :filament_id, presence: true
-  validates :ovp, inclusion: { in: [true, false] }
-  validates :refill_only, inclusion: { in: [true, false] }
+  validates :ovp, inclusion: { in: [ true, false ] }
+  validates :refill_only, inclusion: { in: [ true, false ] }
   validates :gross_weight_grams, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :remaining_weight_grams, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
@@ -28,7 +28,7 @@ class Spool < ApplicationRecord
     return if filament_record.nil? || filament_record.product.nil?
 
     if gross_weight_grams.present?
-      self.remaining_weight_grams = [gross_weight_grams - filament_record.product.spool_weight_grams, 0].max
+      self.remaining_weight_grams = [ gross_weight_grams - filament_record.product.spool_weight_grams, 0 ].max
     else
       self.remaining_weight_grams = filament_record.product.weight_grams
     end

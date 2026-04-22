@@ -9,4 +9,3 @@ class CreateMaterials < ActiveRecord::Migration[8.1]
     add_index :materials, :name, unique: true
   end
 end
-

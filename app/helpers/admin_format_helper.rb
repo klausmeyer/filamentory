@@ -41,6 +41,6 @@ module AdminFormatHelper
         content_tag(:div, "", class: "spool-progress__fill", style: "width: #{percent}%;")
       end
 
-    content_tag(:div, safe_join([meta, track]), class: "spool-progress")
+    content_tag(:div, safe_join([ meta, track ]), class: "spool-progress")
   end
 end

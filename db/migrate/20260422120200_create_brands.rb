@@ -9,4 +9,3 @@ class CreateBrands < ActiveRecord::Migration[8.1]
     add_index :brands, :name, unique: true
   end
 end
-

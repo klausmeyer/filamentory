@@ -9,4 +9,3 @@ class CreateVariants < ActiveRecord::Migration[8.1]
     add_index :variants, :name, unique: true
   end
 end
-
