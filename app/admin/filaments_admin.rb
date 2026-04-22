@@ -21,7 +21,7 @@ Trestle.resource(:filaments) do
 
   form do |filament|
     row do
-      col(sm: 12) { select :product, Product.order(:name) }
+      col(sm: 12) { select :product_id, Product.order(:name).pluck(:name, :id), label: "Product" }
     end
 
     row do
