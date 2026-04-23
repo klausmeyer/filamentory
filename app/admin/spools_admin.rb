@@ -88,6 +88,11 @@ Trestle.resource(:spools) do
     Spool.includes(filament: :product)
   end
 
+  sort_column :name do |collection, order|
+    direction = order == :desc ? :desc : :asc
+    collection.left_joins(:filament).reorder(Filament.arel_table[:name].public_send(direction))
+  end
+
   params do |params|
     params.require(:spool).permit(:filament_id, :ovp, :refill_only, :gross_weight_grams, :comment)
   end
