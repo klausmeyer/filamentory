@@ -13,13 +13,13 @@ Trestle.resource(:spools) do
     column :name, link: true, truncate: false
     column :ovp, align: :center
     column :refill_only, align: :center
-    column :gross_weight_grams, header: "Gross (g)", align: :right do |spool|
+    column :gross_weight_grams, sort: :gross_weight_grams, header: "Gross (g)", align: :right do |spool|
       grams_number(spool.gross_weight_grams)
     end
-    column :remaining_weight_grams, header: "Net weight" do |spool|
+    column :remaining_weight_grams, sort: :remaining_weight_grams, header: "Net weight" do |spool|
       spool_remaining_progress_bar(spool)
     end
-    column :updated_at, align: :center
+    column :updated_at, align: :center, sort: { default: true, default_order: :desc }
     actions
   end
 
@@ -85,12 +85,24 @@ Trestle.resource(:spools) do
   end
 
   collection do |params|
-    Spool.includes(filament: :product)
+    collection = Spool.includes(filament: :product)
+    collection = collection.order(updated_at: :desc) if params[:sort].blank?
+    collection
   end
 
   sort_column :name do |collection, order|
     direction = order == :desc ? :desc : :asc
     collection.left_joins(:filament).reorder(Filament.arel_table[:name].public_send(direction))
+  end
+
+  sort_column :gross_weight_grams do |collection, order|
+    direction = order == :desc ? :desc : :asc
+    collection.reorder(gross_weight_grams: direction, id: :asc)
+  end
+
+  sort_column :remaining_weight_grams do |collection, order|
+    direction = order == :desc ? :desc : :asc
+    collection.reorder(remaining_weight_grams: direction, id: :asc)
   end
 
   params do |params|
