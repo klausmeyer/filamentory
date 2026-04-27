@@ -85,9 +85,13 @@ Trestle.resource(:spools) do
   end
 
   collection do |params|
-    collection = Spool.includes(filament: :product)
-    collection = collection.order(updated_at: :desc) if params[:sort].blank?
+    collection = Spool.joins(filament: :product)
+    collection = collection.order(updated_at: :desc) unless params && params[:sort].present?
     collection
+  end
+
+  search do |q|
+    q ? collection.where("filaments.name ILIKE ?", "%#{q}%") : collection
   end
 
   sort_column :name do |collection, order|

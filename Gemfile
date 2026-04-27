@@ -18,6 +18,7 @@ gem "stimulus-rails"
 # Admin UI
 gem "trestle", "~> 0.10.1"
 gem "trestle-auth", "~> 0.5.0"
+gem "trestle-search", "~> 0.5.1"
 
 # Authentication
 gem "devise"
