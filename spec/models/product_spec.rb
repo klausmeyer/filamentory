@@ -1,30 +1,21 @@
 require "rails_helper"
 
 RSpec.describe Product, type: :model do
-  def create_product!(name: "Bambu Lab - PLA Basic", spool_weight_grams: 250, weight_grams: 1_000)
-    brand = Brand.create!(name: "Bambu Lab")
-    material = Material.create!(name: "PLA")
-    variant = Variant.create!(name: "Basic")
+  fixtures :brands, :materials, :variants, :products
 
-    Product.create!(
-      name: name,
-      brand: brand,
-      material: material,
-      variant: variant,
-      spool_weight_grams: spool_weight_grams,
-      weight_grams: weight_grams
-    )
-  end
+  let(:bambu_lab) { brands(:bambu_lab) }
+  let(:pla) { materials(:pla) }
+  let(:basic) { variants(:basic) }
 
   it "requires a unique name" do
-    create_product!(name: "Unique Name")
+    products(:unique_name_product)
 
     duplicate =
       Product.new(
         name: "Unique Name",
-        brand: Brand.create!(name: "Other Brand"),
-        material: Material.create!(name: "Other Material"),
-        variant: Variant.create!(name: "Other Variant"),
+        brand: brands(:other_brand),
+        material: materials(:other_material),
+        variant: variants(:other_variant),
         spool_weight_grams: 250,
         weight_grams: 1_000
       )
@@ -34,16 +25,12 @@ RSpec.describe Product, type: :model do
   end
 
   it "validates weight_grams > 0" do
-    brand = Brand.create!(name: "Bambu Lab")
-    material = Material.create!(name: "PLA")
-    variant = Variant.create!(name: "Basic")
-
     product =
       Product.new(
         name: "Bad Weight",
-        brand: brand,
-        material: material,
-        variant: variant,
+        brand: bambu_lab,
+        material: pla,
+        variant: basic,
         spool_weight_grams: 250,
         weight_grams: 0
       )
@@ -53,16 +40,12 @@ RSpec.describe Product, type: :model do
   end
 
   it "validates spool_weight_grams >= 0" do
-    brand = Brand.create!(name: "Bambu Lab")
-    material = Material.create!(name: "PLA")
-    variant = Variant.create!(name: "Basic")
-
     product =
       Product.new(
         name: "Bad Spool Weight",
-        brand: brand,
-        material: material,
-        variant: variant,
+        brand: bambu_lab,
+        material: pla,
+        variant: basic,
         spool_weight_grams: -1,
         weight_grams: 1_000
       )

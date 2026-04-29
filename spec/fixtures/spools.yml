@@ -1,0 +1,13 @@
+spool_black:
+  filament: filament_black
+  ovp: false
+  refill_only: false
+  gross_weight_grams: 1000
+  remaining_weight_grams: 800
+
+spool_white:
+  filament: filament_white
+  ovp: false
+  refill_only: false
+  gross_weight_grams: 1000
+  remaining_weight_grams: 800

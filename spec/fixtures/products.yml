@@ -1,0 +1,15 @@
+product_a:
+  name: Product A
+  brand: brand_a
+  material: pla
+  variant: standard
+  weight_grams: 1000
+  spool_weight_grams: 200
+
+unique_name_product:
+  name: Unique Name
+  brand: bambu_lab
+  material: pla
+  variant: basic
+  weight_grams: 1000
+  spool_weight_grams: 250
