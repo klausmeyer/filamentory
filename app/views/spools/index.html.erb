@@ -1,0 +1,33 @@
+<table class="table">
+  <colgroup>
+    <col width="10%">
+    <col width="40%">
+    <col width="10%">
+    <col width="30%">
+    <col width="10%">
+  </colgroup>
+  <tbody>
+    <% @spools.group_by { it.filament.product }.each do |product, spools| %>
+      <tr class="table-light">
+        <th colspan="5">
+          <%= product.brand.name %>
+          &middot;
+          <%= product.material.name %>
+          &middot;
+          <%= product.variant.name %>
+          &nbsp;
+          <small>
+            (
+              <%= pluralize spools.size, "spool" %>
+              &middot;
+              <%= number_with_delimiter spools.sum(&:remaining_weight_grams) %> g
+            )
+          </small>
+        </th>
+      </tr>
+      <% spools.each do |spool| %>
+        <%= render "row", spool: spool %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

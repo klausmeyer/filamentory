@@ -201,7 +201,7 @@ Trestle.configure do |config|
   # Specify the redirect location after logging out.
   # Defaults to the trestle-auth new login path.
   #
-  # config.auth.redirect_on_logout = -> { "/" }
+  config.auth.redirect_on_logout = -> { "/" }
 
   # Enable or disable the built-in login/logout form and actions. Defaults to true.
   # You may wish to disable these if you are using a custom backend and
