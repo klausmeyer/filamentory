@@ -17,6 +17,7 @@ gem "stimulus-rails"
 
 # Public UI
 gem "bootstrap", "~> 5.3.8"
+gem "bootswatch", github: "thomaspark/bootswatch", branch: "v5"
 gem "dartsass-rails", "~> 0.5.1"
 
 # Admin UI
