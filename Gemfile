@@ -15,6 +15,10 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
+# Public UI
+gem "bootstrap", "~> 5.3.8"
+gem "dartsass-rails", "~> 0.5.1"
+
 # Admin UI
 gem "trestle", "~> 0.10.1"
 gem "trestle-auth", "~> 0.5.0"
