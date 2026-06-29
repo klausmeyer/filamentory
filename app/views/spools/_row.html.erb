@@ -19,8 +19,8 @@
       |
       <%= spool.filament.color_name %>
       &middot;
-      <% if spool.filament.product.article_no.present? %>
-        <%= spool.filament.product.article_no %>
+      <% if spool.filament.mpn.present? %>
+        <%= spool.filament.mpn %>
         &middot;
       <% end %>
       <span class="font-monospace"><%= spool.filament.color_hex.upcase %></span>

@@ -12,6 +12,7 @@ Trestle.resource(:filaments) do
     column :name, link: true, truncate: false
     column :product
     column :color_name
+    column :mpn, header: "MPN"
     column :color_hex do |filament|
       content_tag(:span, filament.color_hex.to_s.upcase, class: "hex-color")
     end
@@ -30,6 +31,10 @@ Trestle.resource(:filaments) do
     end
 
     row do
+      col(sm: 6) { text_field :mpn, label: "MPN" }
+    end
+
+    row do
       col(sm: 6) do
         static_field :preview, label: "Preview" do
           color_swatch(filament.color_hex, size: 24)
@@ -45,6 +50,6 @@ Trestle.resource(:filaments) do
   end
 
   params do |params|
-    params.require(:filament).permit(:product_id, :color_name, :color_hex)
+    params.require(:filament).permit(:product_id, :color_name, :color_hex, :mpn)
   end
 end

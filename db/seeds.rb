@@ -88,43 +88,56 @@ elegoo_rapid_petg =
     p.spool_weight_grams = 175
   end
 
-filament_for = lambda do |product:, color_name:, color_hex:|
+filament_for = lambda do |product:, color_name:, color_hex:, mpn: nil|
   Filament
     .find_or_initialize_by(product: product, color_name: color_name)
     .tap do |filament|
       filament.color_hex = color_hex
+      filament.mpn = mpn
       filament.save! if filament.changed?
     end
 end
 
-bambu_pla_basic_black = filament_for.call(product: bambu_pla_basic, color_name: "Black", color_hex: "#000000")
-bambu_pla_basic_grey = filament_for.call(product: bambu_pla_basic, color_name: "Grey", color_hex: "#c2c2c2")
+bambu_pla_basic_black =
+  filament_for.call(
+    product: bambu_pla_basic,
+    color_name: "Black",
+    color_hex: "#000000",
+    mpn: "BAMBU-PLA-BASIC-BLACK"
+  )
+bambu_pla_basic_grey =
+  filament_for.call(
+    product: bambu_pla_basic,
+    color_name: "Grey",
+    color_hex: "#c2c2c2",
+    mpn: "BAMBU-PLA-BASIC-GREY"
+  )
 
 [
-  [ "Ash Grey", "#909396" ],
-  [ "Charcoal", "#000000" ],
-  [ "Dark Red", "#b2353b" ],
-  [ "Ivory White", "#ffffff" ],
-  [ "Mandarin Orange", "#f88d58" ],
-  [ "Marine Blue", "#006eb7" ]
-].each do |(color_name, color_hex)|
-  filament_for.call(product: bambu_pla_matte, color_name: color_name, color_hex: color_hex)
+  [ "Ash Grey", "#909396", "BAMBU-PLA-MATTE-ASH-GREY" ],
+  [ "Charcoal", "#000000", "BAMBU-PLA-MATTE-CHARCOAL" ],
+  [ "Dark Red", "#b2353b", "BAMBU-PLA-MATTE-DARK-RED" ],
+  [ "Ivory White", "#ffffff", "BAMBU-PLA-MATTE-IVORY-WHITE" ],
+  [ "Mandarin Orange", "#f88d58", "BAMBU-PLA-MATTE-MANDARIN-ORANGE" ],
+  [ "Marine Blue", "#006eb7", "BAMBU-PLA-MATTE-MARINE-BLUE" ]
+].each do |(color_name, color_hex, mpn)|
+  filament_for.call(product: bambu_pla_matte, color_name: color_name, color_hex: color_hex, mpn: mpn)
 end
 
 [
-  [ "Black", "#000000" ],
-  [ "Dark Blue", "#2240af" ],
-  [ "Neon Green", "#08e327" ],
-  [ "Translucent", "#f3f3f3" ]
-].each do |(color_name, color_hex)|
-  filament_for.call(product: elegoo_pla_basic, color_name: color_name, color_hex: color_hex)
+  [ "Black", "#000000", "ELEGOO-PLA-BASIC-BLACK" ],
+  [ "Dark Blue", "#2240af", "ELEGOO-PLA-BASIC-DARK-BLUE" ],
+  [ "Neon Green", "#08e327", "ELEGOO-PLA-BASIC-NEON-GREEN" ],
+  [ "Translucent", "#f3f3f3", "ELEGOO-PLA-BASIC-TRANSLUCENT" ]
+].each do |(color_name, color_hex, mpn)|
+  filament_for.call(product: elegoo_pla_basic, color_name: color_name, color_hex: color_hex, mpn: mpn)
 end
 
 [
-  [ "Red", "#ea140e" ],
-  [ "White", "#ffffff" ]
-].each do |(color_name, color_hex)|
-  filament_for.call(product: elegoo_rapid_petg, color_name: color_name, color_hex: color_hex)
+  [ "Red", "#ea140e", "ELEGOO-RAPID-PETG-RED" ],
+  [ "White", "#ffffff", "ELEGOO-RAPID-PETG-WHITE" ]
+].each do |(color_name, color_hex, mpn)|
+  filament_for.call(product: elegoo_rapid_petg, color_name: color_name, color_hex: color_hex, mpn: mpn)
 end
 
 Spool.find_or_create_by!(

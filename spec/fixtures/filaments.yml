@@ -3,9 +3,11 @@ filament_black:
   name: Product A - Black
   color_name: Black
   color_hex: "#000000"
+  mpn: PA-BLK-001
 
 filament_white:
   product: product_a
   name: Product A - White
   color_name: White
   color_hex: "#FFFFFF"
+  mpn: PA-WHT-001
