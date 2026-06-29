@@ -3,6 +3,7 @@ product_a:
   brand: brand_a
   material: pla
   variant: standard
+  diameter: 1.75
   weight_grams: 1000
   spool_weight_grams: 200
 
@@ -11,5 +12,6 @@ unique_name_product:
   brand: bambu_lab
   material: pla
   variant: basic
+  diameter: 1.75
   weight_grams: 1000
   spool_weight_grams: 250

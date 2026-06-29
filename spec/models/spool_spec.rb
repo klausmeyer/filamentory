@@ -17,6 +17,7 @@ RSpec.describe Spool, type: :model do
       brand: brand,
       material: material,
       variant: variant,
+      diameter: 1.75,
       spool_weight_grams: spool_weight_grams,
       weight_grams: weight_grams
     )

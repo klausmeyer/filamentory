@@ -16,6 +16,7 @@ RSpec.describe Product, type: :model do
         brand: brands(:other_brand),
         material: materials(:other_material),
         variant: variants(:other_variant),
+        diameter: 1.75,
         spool_weight_grams: 250,
         weight_grams: 1_000
       )
@@ -31,6 +32,7 @@ RSpec.describe Product, type: :model do
         brand: bambu_lab,
         material: pla,
         variant: basic,
+        diameter: 1.75,
         spool_weight_grams: 250,
         weight_grams: 0
       )
@@ -46,11 +48,28 @@ RSpec.describe Product, type: :model do
         brand: bambu_lab,
         material: pla,
         variant: basic,
+        diameter: 1.75,
         spool_weight_grams: -1,
         weight_grams: 1_000
       )
 
     expect(product).not_to be_valid
     expect(product.errors[:spool_weight_grams]).to be_present
+  end
+
+  it "validates diameter > 0" do
+    product =
+      Product.new(
+        name: "Bad Diameter",
+        brand: bambu_lab,
+        material: pla,
+        variant: basic,
+        diameter: 0,
+        spool_weight_grams: 250,
+        weight_grams: 1_000
+      )
+
+    expect(product).not_to be_valid
+    expect(product.errors[:diameter]).to be_present
   end
 end
