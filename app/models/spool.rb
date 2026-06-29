@@ -16,7 +16,8 @@ class Spool < ApplicationRecord
       brands:    { name: :asc },
       materials: { name: :asc },
       variants:  { name: :asc },
-      filament:  { color_hex: :asc }
+      filament:  { color_hex: :asc },
+      spools:    { remaining_weight_grams: :asc }
     )
   end
 

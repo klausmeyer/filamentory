@@ -27,6 +27,9 @@
     </p>
   </td>
   <td>
+    <% if number_of_spools != 1 %>
+      <span class="badge rounded-pill text-bg-info"><%= pluralize number_of_spools, "spool" %></span>
+    <% end %>
     <% if spool.ovp? %>
       <span class="badge rounded-pill text-bg-success">OVP</span>
     <% end %>

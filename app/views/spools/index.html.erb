@@ -1,8 +1,8 @@
 <table class="table">
   <colgroup>
     <col width="10%">
-    <col width="40%">
-    <col width="10%">
+    <col width="30%">
+    <col width="20%">
     <col width="30%">
     <col width="10%">
   </colgroup>
@@ -25,8 +25,8 @@
           </small>
         </th>
       </tr>
-      <% spools.each do |spool| %>
-        <%= render "row", spool: spool %>
+      <% spools.group_by(&:filament).each do |_filament, spools| %>
+        <%= render "row", spool: spools.first, number_of_spools: spools.size %>
       <% end %>
     <% end %>
   </tbody>
