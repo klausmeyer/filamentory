@@ -1,7 +1,5 @@
 class SpoolsController < ApplicationController
   def index
-    @spools = Spool
-      .eager_load(filament: { product: [ :brand, :material, :variant ] })
-      .order(brands: { name: :asc }, materials: { name: :asc }, variants: { name: :asc })
+    @spools = Spool.sorted_by_filament
   end
 end
