@@ -11,6 +11,15 @@ class Spool < ApplicationRecord
   validates :gross_weight_grams, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :remaining_weight_grams, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  def self.sorted_by_filament
+    eager_load(filament: { product: [ :brand, :material, :variant ] }).order(
+      brands:    { name: :asc },
+      materials: { name: :asc },
+      variants:  { name: :asc },
+      filament:  { color_hex: :asc }
+    )
+  end
+
   private
 
   def sync_remaining_weight_grams
