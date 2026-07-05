@@ -7,25 +7,20 @@
     <col width="10%">
   </colgroup>
   <tbody>
-    <% @spools.group_by { it.filament.product }.each do |product, spools| %>
+    <% @spools.group_by { it.variant.filament }.each do |filament, spools| %>
       <tr class="table-light">
         <th colspan="5">
-          <%= product.brand.name %>
-          &middot;
-          <%= product.material.name %>
-          &middot;
-          <%= product.variant.name %>
-          &nbsp;
+          <%= filament.brand.name %> &middot; <%= filament.name %>
           <small>
             (
               <%= pluralize spools.size, "spool" %>
               &middot;
-              <%= number_with_delimiter spools.sum(&:remaining_weight_grams) %> g
+              <%= number_with_delimiter spools.sum(&:remaining_weight_net) %> g
             )
           </small>
         </th>
       </tr>
-      <% spools.group_by(&:filament).each do |_filament, spools| %>
+      <% spools.group_by { it.variant.color }.each do |color, spools| %>
         <%= render "row", spool: spools.first, number_of_spools: spools.size %>
       <% end %>
     <% end %>

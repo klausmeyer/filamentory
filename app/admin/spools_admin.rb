@@ -1,47 +1,44 @@
 Trestle.resource(:spools) do
   menu do
-    group :inventory, priority: :first do
+    group :inventory do
       item :spools, icon: "fas fa-circle-notch", priority: :first
     end
   end
 
-  table do
-    column :id, align: :right
-    column :color, header: false, align: :center do |spool|
-      color_swatch(spool.filament&.color_hex, size: 14)
-    end
-    column :name, link: true, truncate: false
-    column :ovp, align: :center
-    column :refill_only, align: :center
-    column :gross_weight_grams, sort: :gross_weight_grams, header: "Gross (g)", align: :right do |spool|
-      grams_number(spool.gross_weight_grams)
-    end
-    column :remaining_weight_grams, sort: :remaining_weight_grams, header: "Net weight" do |spool|
-      spool_remaining_progress_bar(spool)
-    end
-    column :updated_at, align: :center, sort: { default: true, default_order: :desc }
-    actions
-  end
+  # Customize the table columns shown on the index view.
+  #
+  # table do
+  #   column :name
+  #   column :created_at, align: :center
+  #   actions
+  # end
+
+  # Customize the form fields shown on the new/edit views.
+  #
+  # form do |spool|
+  #   text_field :name
+  #
+  #   row do
+  #     col { datetime_field :updated_at }
+  #     col { datetime_field :created_at }
+  #   end
+  # end
 
   form do |spool|
     tab :details do
       row do
         col(sm: 12) do
-          select :filament_id, Filament.order(:name).pluck(:name, :id), label: "Filament"
+          select :variant_id, Variant.order(:name).pluck(:name, :id), label: "Variant"
         end
       end
 
-      number_field :gross_weight_grams, label: "Gross weight (g)"
-
-      static_field :remaining_weight_grams, label: "Net weight" do
-        spool_remaining_progress_bar(spool)
+      row do
+        number_field :remaining_weight_gross
       end
 
-      text_field :comment
-
       row do
-        col(sm: 6) { check_box :ovp, label: "OVP?" }
-        col(sm: 6) { check_box :refill_only, label: "Refill only?" }
+        col(sm: 6) { check_box :ovp }
+        col(sm: 6) { check_box :refill }
       end
     end
 
@@ -84,32 +81,14 @@ Trestle.resource(:spools) do
     end
   end
 
-  collection do |params|
-    collection = Spool.joins(filament: :product)
-    collection = collection.order(updated_at: :desc) unless params && params[:sort].present?
-    collection
-  end
-
-  search do |q|
-    q ? collection.where("filaments.name ILIKE ?", "%#{q}%") : collection
-  end
-
-  sort_column :name do |collection, order|
-    direction = order == :desc ? :desc : :asc
-    collection.left_joins(:filament).reorder(Filament.arel_table[:name].public_send(direction))
-  end
-
-  sort_column :gross_weight_grams do |collection, order|
-    direction = order == :desc ? :desc : :asc
-    collection.reorder(gross_weight_grams: direction, id: :asc)
-  end
-
-  sort_column :remaining_weight_grams do |collection, order|
-    direction = order == :desc ? :desc : :asc
-    collection.reorder(remaining_weight_grams: direction, id: :asc)
-  end
-
-  params do |params|
-    params.require(:spool).permit(:filament_id, :ovp, :refill_only, :gross_weight_grams, :comment)
-  end
+  # By default, all parameters passed to the update and create actions will be
+  # permitted. If you do not have full trust in your users, you should explicitly
+  # define the list of permitted parameters.
+  #
+  # For further information, see the Rails documentation on Strong Parameters:
+  #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
+  #
+  # params do |params|
+  #   params.require(:spool).permit(:name, ...)
+  # end
 end

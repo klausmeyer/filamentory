@@ -1,46 +1,40 @@
 <tr>
   <td>
     <divv class="d-flex justify-content-center">
-      <div class="rounded-2 border" style="width: 45px; height: 45px; background-color: <%= spool.filament.color_hex %>">&nbsp;</div>
+      <div class="rounded-2 border" style="width: 45px; height: 45px; background-color: <%= spool.variant.color %>">&nbsp;</div>
     </div>
   </td>
   <td>
     <p class="my-0">
       <strong>
-        <%= spool.filament.product.brand.name %>
+        <%= spool.variant.filament.brand.name %>
         &middot;
-        <%= spool.filament.product.material.name %>
+        <%= spool.variant.filament.material.name %>
         &middot;
-        <%= spool.filament.product.variant.name %>
+        <%= spool.variant.name %>
       </strong>
     </p>
     <p class="my-0 text-muted small">
-      <%= spool.filament.product.diameter %> mm
-      |
-      <%= spool.filament.color_name %>
+      <%= spool.variant.name %>
       &middot;
-      <% if spool.filament.product.article_no.present? %>
-        <%= spool.filament.product.article_no %>
-        &middot;
-      <% end %>
-      <span class="font-monospace"><%= spool.filament.color_hex.upcase %></span>
+      <span class="font-monospace"><%= spool.variant.color %></span>
     </p>
   </td>
   <td>
-    <% if number_of_spools != 1 %>
+    <% if number_of_spools > 1 %>
       <span class="badge rounded-pill text-bg-info"><%= pluralize number_of_spools, "spool" %></span>
     <% end %>
-    <% if spool.ovp? %>
+    <% if spool.ovp %>
       <span class="badge rounded-pill text-bg-success">OVP</span>
     <% end %>
-    <% if spool.refill_only? %>
+    <% if spool.refill %>
       <span class="badge rounded-pill text-bg-danger">Refill</span>
     <% end %>
   </td>
   <td>
-    <% percent = ((spool.remaining_weight_grams.to_f / spool.filament.product.weight_grams) * 100).floor.clamp(0, 100) %>
+    <% percent = ((spool.remaining_weight_net.to_f / spool.variant.weight_net) * 100).floor.clamp(0, 100) %>
     <small class="my-0 text-muted">
-      <%= number_with_delimiter spool.remaining_weight_grams %> g / <%= number_with_delimiter spool.filament.product.weight_grams %> g
+      <%= number_with_delimiter spool.remaining_weight_net %> g / <%= number_with_delimiter spool.variant.weight_net %> g
     </small>
     <div class="progress" role="progressbar" aria-label="Progress bar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100">
       <div class="progress-bar bg-dark" style="width: <%= percent %>%"></div>

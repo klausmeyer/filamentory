@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_22_120700) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_05_154106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,13 +22,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_22_120700) do
   end
 
   create_table "filaments", force: :cascade do |t|
-    t.string "color_hex", null: false
-    t.string "color_name", null: false
+    t.bigint "brand_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "material_id", null: false
     t.string "name", null: false
-    t.bigint "product_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_filaments_on_product_id"
+    t.index ["brand_id"], name: "index_filaments_on_brand_id"
+    t.index ["material_id"], name: "index_filaments_on_material_id"
+    t.index ["name"], name: "index_filaments_on_name", unique: true
   end
 
   create_table "materials", force: :cascade do |t|
@@ -38,31 +39,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_22_120700) do
     t.index ["name"], name: "index_materials_on_name", unique: true
   end
 
-  create_table "products", force: :cascade do |t|
-    t.bigint "brand_id", null: false
+  create_table "spools", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.bigint "material_id", null: false
-    t.string "name", null: false
-    t.integer "spool_weight_grams", null: false
+    t.boolean "ovp", default: false, null: false
+    t.boolean "refill", default: false, null: false
+    t.integer "remaining_weight_gross", null: false
     t.datetime "updated_at", null: false
     t.bigint "variant_id", null: false
-    t.integer "weight_grams", null: false
-    t.index ["brand_id"], name: "index_products_on_brand_id"
-    t.index ["material_id"], name: "index_products_on_material_id"
-    t.index ["name"], name: "index_products_on_name", unique: true
-    t.index ["variant_id"], name: "index_products_on_variant_id"
-  end
-
-  create_table "spools", force: :cascade do |t|
-    t.string "comment"
-    t.datetime "created_at", null: false
-    t.bigint "filament_id", null: false
-    t.integer "gross_weight_grams"
-    t.boolean "ovp", default: false, null: false
-    t.boolean "refill_only", default: false, null: false
-    t.integer "remaining_weight_grams", default: 0, null: false
-    t.datetime "updated_at", null: false
-    t.index ["filament_id"], name: "index_spools_on_filament_id"
+    t.index ["variant_id"], name: "index_spools_on_variant_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -78,9 +62,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_22_120700) do
   end
 
   create_table "variants", force: :cascade do |t|
+    t.string "color", null: false
     t.datetime "created_at", null: false
+    t.bigint "filament_id", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
+    t.integer "weight_net", null: false
+    t.integer "weight_tare", null: false
+    t.index ["filament_id"], name: "index_variants_on_filament_id"
     t.index ["name"], name: "index_variants_on_name", unique: true
   end
 
@@ -99,9 +88,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_22_120700) do
     t.index ["whodunnit"], name: "index_versions_on_whodunnit"
   end
 
-  add_foreign_key "filaments", "products"
-  add_foreign_key "products", "brands"
-  add_foreign_key "products", "materials"
-  add_foreign_key "products", "variants"
-  add_foreign_key "spools", "filaments"
+  add_foreign_key "filaments", "brands"
+  add_foreign_key "filaments", "materials"
+  add_foreign_key "spools", "variants"
+  add_foreign_key "variants", "filaments"
 end

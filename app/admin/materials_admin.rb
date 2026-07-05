@@ -1,21 +1,37 @@
 Trestle.resource(:materials) do
   menu do
-    group :inventory do
-      item :materials, icon: "fas fa-atom", priority: :last
+    group :master_data do
+      item :materials, icon: "fas fa-atom"
     end
   end
 
-  table do
-    column :name, link: true
-    column :updated_at, align: :center
-    actions
-  end
+  # Customize the table columns shown on the index view.
+  #
+  # table do
+  #   column :name
+  #   column :created_at, align: :center
+  #   actions
+  # end
 
-  form do |material|
-    text_field :name
-  end
+  # Customize the form fields shown on the new/edit views.
+  #
+  # form do |material|
+  #   text_field :name
+  #
+  #   row do
+  #     col { datetime_field :updated_at }
+  #     col { datetime_field :created_at }
+  #   end
+  # end
 
-  params do |params|
-    params.require(:material).permit(:name)
-  end
+  # By default, all parameters passed to the update and create actions will be
+  # permitted. If you do not have full trust in your users, you should explicitly
+  # define the list of permitted parameters.
+  #
+  # For further information, see the Rails documentation on Strong Parameters:
+  #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
+  #
+  # params do |params|
+  #   params.require(:material).permit(:name, ...)
+  # end
 end
