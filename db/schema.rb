@@ -29,7 +29,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_154106) do
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_filaments_on_brand_id"
     t.index ["material_id"], name: "index_filaments_on_material_id"
-    t.index ["name"], name: "index_filaments_on_name", unique: true
+    t.index ["name"], name: "index_filaments_on_name"
   end
 
   create_table "materials", force: :cascade do |t|
