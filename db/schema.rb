@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_22_120700) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_10_104752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,10 +58,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_22_120700) do
     t.datetime "created_at", null: false
     t.bigint "filament_id", null: false
     t.integer "gross_weight_grams"
+    t.string "inventory_tag"
     t.boolean "ovp", default: false, null: false
     t.boolean "refill_only", default: false, null: false
     t.integer "remaining_weight_grams", default: 0, null: false
     t.datetime "updated_at", null: false
+    t.index "lower((inventory_tag)::text)", name: "index_spools_on_lower_inventory_tag", unique: true
     t.index ["filament_id"], name: "index_spools_on_filament_id"
   end
 

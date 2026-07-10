@@ -10,12 +10,10 @@ Trestle.resource(:spools) do
     column :color, header: false, align: :center do |spool|
       color_swatch(spool.filament&.color_hex, size: 14)
     end
+    column :inventory_tag
     column :name, link: true, truncate: false
     column :ovp, align: :center
     column :refill_only, align: :center
-    column :gross_weight_grams, sort: :gross_weight_grams, header: "Gross (g)", align: :right do |spool|
-      grams_number(spool.gross_weight_grams)
-    end
     column :remaining_weight_grams, sort: :remaining_weight_grams, header: "Net weight" do |spool|
       spool_remaining_progress_bar(spool)
     end
@@ -36,6 +34,8 @@ Trestle.resource(:spools) do
       static_field :remaining_weight_grams, label: "Net weight" do
         spool_remaining_progress_bar(spool)
       end
+
+      text_field :inventory_tag
 
       text_field :comment
 
@@ -110,6 +110,6 @@ Trestle.resource(:spools) do
   end
 
   params do |params|
-    params.require(:spool).permit(:filament_id, :ovp, :refill_only, :gross_weight_grams, :comment)
+    params.require(:spool).permit(:filament_id, :ovp, :refill_only, :gross_weight_grams, :inventory_tag, :comment)
   end
 end
