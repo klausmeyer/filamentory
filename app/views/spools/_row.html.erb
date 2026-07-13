@@ -37,7 +37,7 @@
       <%= number_with_delimiter spool.remaining_weight_grams %> g / <%= number_with_delimiter spool.filament.product.weight_grams %> g
     </small>
     <div class="progress" role="progressbar" aria-label="Progress bar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar bg-dark" style="width: <%= percent %>%"></div>
+      <div class="progress-bar progress-bar-striped bg-dark" style="width: <%= percent %>%"></div>
     </div>
   </td>
   <td>
