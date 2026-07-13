@@ -24,6 +24,10 @@
         &middot;
       <% end %>
       <span class="font-monospace"><%= spool.filament.color_hex.upcase %></span>
+      <% if spool.inventory_tag.present? %>
+        |
+        <%= spool.inventory_tag %>
+      <% end %>
     </p>
   </td>
   <td>
