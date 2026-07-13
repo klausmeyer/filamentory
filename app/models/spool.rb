@@ -1,11 +1,16 @@
 class Spool < ApplicationRecord
+  INVENTORY_TAG_ALPHABET = %w[1 2 3 4 5 6 7 8 9 A B C D E F G H J K M N P Q R S T V W X Y Z].freeze
+  INVENTORY_TAG_LENGTH = 5
+
   belongs_to :filament
 
   has_paper_trail
 
+  before_validation :set_defaults
   before_validation :sync_remaining_weight_grams
 
   validates :filament_id, presence: true
+  validates :inventory_tag, uniqueness: { case_sensitive: false, allow_nil: true }
   validates :ovp, inclusion: { in: [ true, false ] }
   validates :refill_only, inclusion: { in: [ true, false ] }
   validates :gross_weight_grams, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
@@ -21,7 +26,28 @@ class Spool < ApplicationRecord
     )
   end
 
+  def name
+    loaded_filament = association(:filament).loaded? ? filament : nil
+
+    filament_name =
+      if loaded_filament.present? && loaded_filament.id == filament_id
+        loaded_filament.name
+      else
+        Filament.where(id: filament_id).pick(:name)
+      end
+
+    filament_name.to_s
+  end
+
+  def to_s
+    name
+  end
+
   private
+
+  def set_defaults
+    self.inventory_tag = random_inventory_tag if inventory_tag.blank?
+  end
 
   def sync_remaining_weight_grams
     return if filament_id.blank?
@@ -44,22 +70,13 @@ class Spool < ApplicationRecord
     end
   end
 
-  public
+  def random_inventory_tag
+    loop do
+      code = INVENTORY_TAG_ALPHABET.sample(INVENTORY_TAG_LENGTH).join
 
-  def name
-    loaded_filament = association(:filament).loaded? ? filament : nil
+      next if self.class.any?(inventory_tag: code)
 
-    filament_name =
-      if loaded_filament.present? && loaded_filament.id == filament_id
-        loaded_filament.name
-      else
-        Filament.where(id: filament_id).pick(:name)
-      end
-
-    filament_name.to_s
-  end
-
-  def to_s
-    name
+      break code.upcase
+    end
   end
 end
