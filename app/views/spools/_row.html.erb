@@ -20,15 +20,15 @@
     </p>
   </td>
   <td>
-    <span class="badge rounded-pill text-bg-dark" style="letter-spacing: 0.1rem;"><%= spool.inventory_tag %></span>
+    <span class="badge pill text-bg-dark font-monospace" style="letter-spacing: 0.2rem; padding-right: 0.2rem;"><%= spool.inventory_tag %></span>
     <% if number_of_spools != 1 %>
-      <span class="badge rounded-pill text-bg-info"><%= pluralize number_of_spools, "spool" %></span>
+      <span class="badge pill text-bg-info"><%= pluralize number_of_spools, "spool" %></span>
     <% end %>
     <% if spool.ovp? %>
-      <span class="badge rounded-pill text-bg-success">OVP</span>
+      <span class="badge pill text-bg-success">OVP</span>
     <% end %>
     <% if spool.refill_only? %>
-      <span class="badge rounded-pill text-bg-danger">Refill</span>
+      <span class="badge pill text-bg-danger">Refill</span>
     <% end %>
   </td>
   <td>
