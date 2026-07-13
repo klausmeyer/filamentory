@@ -10,27 +10,17 @@
         <%= spool.filament.product.brand.name %>
         &middot;
         <%= spool.filament.product.material.name %>
-        &middot;
         <%= spool.filament.product.variant.name %>
       </strong>
     </p>
     <p class="my-0 text-muted small">
       <%= spool.filament.product.diameter %> mm
-      |
-      <%= spool.filament.color_name %>
       &middot;
-      <% if spool.filament.product.article_no.present? %>
-        <%= spool.filament.product.article_no %>
-        &middot;
-      <% end %>
-      <span class="font-monospace"><%= spool.filament.color_hex.upcase %></span>
-      <% if spool.inventory_tag.present? %>
-        |
-        <%= spool.inventory_tag %>
-      <% end %>
+      <%= spool.filament.color_name %>
     </p>
   </td>
   <td>
+    <span class="badge rounded-pill text-bg-dark" style="letter-spacing: 0.1rem;"><%= spool.inventory_tag %></span>
     <% if number_of_spools != 1 %>
       <span class="badge rounded-pill text-bg-info"><%= pluralize number_of_spools, "spool" %></span>
     <% end %>
@@ -47,7 +37,7 @@
       <%= number_with_delimiter spool.remaining_weight_grams %> g / <%= number_with_delimiter spool.filament.product.weight_grams %> g
     </small>
     <div class="progress" role="progressbar" aria-label="Progress bar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar bg-dark" style="width: <%= percent %>%"></div>
+      <div class="progress-bar progress-bar-striped bg-dark" style="width: <%= percent %>%"></div>
     </div>
   </td>
   <td>
