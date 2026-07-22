@@ -1,8 +1,6 @@
 Trestle.resource(:materials) do
   menu do
-    group :inventory do
-      item :materials, icon: "fas fa-atom", priority: :last
-    end
+    item :materials, icon: "fas fa-atom"
   end
 
   table do

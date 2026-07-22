@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  root to: redirect("/inventory")
+  root to: "spools#index"
 
-  get "/inventory", to: "spools#index"
+  resources :spools, only: [ :edit, :update ]
 end

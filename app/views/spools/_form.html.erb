@@ -1,0 +1,40 @@
+
+<%= form_with model: @spool, id: dom_id(@spool, :form) do |f| %>
+  <div class="form-group row mt-4">
+    <%= f.label :inventory_tag, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :inventory_tag, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-4">
+    <%= f.label :filament_id, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :filament_id, Filament.sorted_by_name, :id, :name, {}, { class: "form-select" } %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-4">
+    <%= f.label :gross_weight_grams, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :gross_weight_grams, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-sm-2">
+      Flags
+    </div>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <%= f.checkbox :ovp, class: "form-check-input" %>
+        <%= f.label :ovp, class: "form-check-label" %>
+      </div>
+      <div class="form-check">
+        <%= f.checkbox :refill_only, class: "form-check-input" %>
+        <%= f.label :refill_only, class: "form-check-label" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
