@@ -1,5 +1,11 @@
 en:
   spools:
+    create:
+      success: "The spool was successfully created"
+      error: "The spool could not be created"
     update:
       success: "The spool was successfully updated"
       error: "The spool could not be updated"
+    destroy:
+      success: "The spool was successfully deleted"
+      error: "The spool could not be deleted"

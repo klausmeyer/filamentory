@@ -49,6 +49,7 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
         <li><%= link_to "Edit", edit_spool_path(spool), class: "dropdown-item", data: { turbo_frame: "modal" } %></li>
+        <li><%= link_to "Delete", spool_path(spool), class: "dropdown-item", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></li>
       </ul>
     </div>
   </td>
