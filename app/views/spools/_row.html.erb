@@ -1,4 +1,4 @@
-<tr>
+<%= content_tag :tr, id: dom_id(spool, :row) do %>
   <td>
     <divv class="d-flex justify-content-center">
       <div class="rounded-2 border" style="width: 45px; height: 45px; background-color: <%= spool.filament.color_hex %>">&nbsp;</div>
@@ -20,8 +20,8 @@
     </p>
   </td>
   <td>
-    <span class="badge pill text-bg-dark font-monospace" style="letter-spacing: 0.2rem; padding-right: 0.2rem;"><%= spool.inventory_tag %></span>
-    <% if number_of_spools != 1 %>
+    <span class="badge pill text-bg-dark font-monospace inventory-tag"><%= spool.inventory_tag %></span>
+    <% if (number_of_spools = spool.number_of_same_filament) != 1 %>
       <span class="badge pill text-bg-info"><%= pluralize number_of_spools, "spool" %></span>
     <% end %>
     <% if spool.ovp? %>
@@ -48,8 +48,8 @@
         </svg>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to "Edit", trestle.edit_spools_admin_path(spool), class: "dropdown-item" %></li>
+        <li><%= link_to "Edit", edit_spool_path(spool), class: "dropdown-item", data: { turbo_frame: "modal" } %></li>
       </ul>
     </div>
   </td>
-</tr>
+<% end %>

@@ -1,8 +1,6 @@
 Trestle.resource(:brands) do
   menu do
-    group :inventory do
-      item :brands, icon: "fas fa-industry", priority: :last
-    end
+    item :brands, icon: "fas fa-industry"
   end
 
   table do

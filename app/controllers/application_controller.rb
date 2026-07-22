@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
 
   include DeleteRestrictionHandling
+
+  before_action :turbo_frame_request_variant
+
+  def turbo_frame_request_variant
+    request.variant = :turbo_frame if turbo_frame_request?
+  end
 end

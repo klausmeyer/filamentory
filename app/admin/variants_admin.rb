@@ -1,8 +1,6 @@
 Trestle.resource(:variants) do
   menu do
-    group :inventory do
-      item :variants, icon: "fas fa-tags", priority: :last
-    end
+    item :variants, icon: "fas fa-tags"
   end
 
   table do

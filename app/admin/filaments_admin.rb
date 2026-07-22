@@ -1,8 +1,6 @@
 Trestle.resource(:filaments) do
   menu do
-    group :inventory, priority: :first do
-      item :filaments, icon: "fas fa-palette", priority: :last
-    end
+    item :filaments, icon: "fas fa-palette"
   end
 
   table do

@@ -10,6 +10,8 @@ class Filament < ApplicationRecord
   validates :color_name, presence: true
   validates :color_hex, presence: true
 
+  scope :sorted_by_name, -> { order(name: :asc) }
+
   def computed_name
     product_name =
       if association(:product).loaded?

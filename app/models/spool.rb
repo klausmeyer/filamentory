@@ -43,6 +43,10 @@ class Spool < ApplicationRecord
     name
   end
 
+  def number_of_same_filament
+    @number_of_same_filament ||= self.class.where(filament_id: filament_id).count
+  end
+
   private
 
   def set_defaults

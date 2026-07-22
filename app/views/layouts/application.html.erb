@@ -24,6 +24,8 @@
   </head>
 
   <body>
+    <%= turbo_frame_tag "modal" %>
+
     <div class="header">
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
@@ -35,6 +37,8 @@
     </div>
     <div class="container">
       <div class="py-4">
+        <%= render "flashes" %>
+
         <%= yield %>
       </div>
     </div>

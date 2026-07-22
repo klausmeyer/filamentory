@@ -1,0 +1,5 @@
+<h3>Edit Spool ( <span class="font-monospace inventory-tag"><%= @spool.inventory_tag %></span> )</h3>
+
+<%= render "form" %>
+
+<button type="submit" class="btn btn-primary" form="<%= dom_id(@spool, :form) %>" data-turbo="false">Save</button>

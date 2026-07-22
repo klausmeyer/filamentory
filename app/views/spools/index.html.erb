@@ -24,7 +24,7 @@
         </th>
       </tr>
       <% spools.group_by(&:filament).each do |_filament, spools| %>
-        <%= render "row", spool: spools.first, number_of_spools: spools.size %>
+        <%= render "row", spool: spools.first %>
       <% end %>
     <% end %>
   </tbody>
