@@ -1,6 +1,8 @@
 class SpoolsController < ApplicationController
   include ActionView::RecordIdentifier
 
+  before_action :require_authenticated_user, except: %i[index]
+
   before_action :set_spools, only: %i[index create update destroy]
   before_action :set_spool, only: %i[edit update destroy]
 
@@ -60,6 +62,10 @@ class SpoolsController < ApplicationController
   end
 
   private
+
+  def require_authenticated_user
+    head :unauthorized unless user_signed_in?
+  end
 
   def spool_params
     params.expect(spool: [ :filament_id, :inventory_tag, :gross_weight_grams, :ovp, :refill_only ])
