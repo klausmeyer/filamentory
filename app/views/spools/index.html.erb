@@ -1,31 +1,5 @@
-<table class="table">
-  <colgroup>
-    <col width="10%">
-    <col width="30%">
-    <col width="20%">
-    <col width="30%">
-    <col width="10%">
-  </colgroup>
-  <tbody>
-    <% @spools.group_by { it.filament.product }.each do |product, spools| %>
-      <tr class="table-light">
-        <th colspan="5">
-          <%= product.brand.name %>
-          &middot;
-          <%= product.material.name %>
-          <%= product.variant.name %>
-          <small>
-            (
-              <%= pluralize spools.size, "spool" %>
-              &middot;
-              <%= number_with_delimiter spools.sum(&:remaining_weight_grams) %> g
-            )
-          </small>
-        </th>
-      </tr>
-      <% spools.group_by(&:filament).each do |_filament, spools| %>
-        <%= render "row", spool: spools.first %>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+<%= link_to "Add Spool", new_spool_path, class: "btn btn-light btn-sm float-end", data: { turbo_frame: "modal" } %>
+
+<%= turbo_frame_tag :spools_list do %>
+  <%= render "list" %>
+<% end %>

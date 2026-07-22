@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   root to: "spools#index"
 
-  resources :spools, only: [ :edit, :update ]
+  resources :spools, only: [ :new, :create, :edit, :update ]
 end
