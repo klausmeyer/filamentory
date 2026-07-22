@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "modal" do %>
+  <%= content_for :modal_body do %>
+    <%= render "form" %>
+  <% end %>
+  <%= render partial: "partials/modal", locals: { title: "Add Spool", form_id: dom_id(@spool, :form) } %>
+<% end %>

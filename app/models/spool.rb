@@ -6,13 +6,12 @@ class Spool < ApplicationRecord
 
   has_paper_trail
 
-  before_validation :set_defaults
+  attribute :inventory_tag, default: -> { random_inventory_tag }
+
   before_validation :sync_remaining_weight_grams
 
   validates :filament_id, presence: true
-  validates :inventory_tag, uniqueness: { case_sensitive: false, allow_nil: true }
-  validates :ovp, inclusion: { in: [ true, false ] }
-  validates :refill_only, inclusion: { in: [ true, false ] }
+  validates :inventory_tag, presence: true, length: { is: INVENTORY_TAG_LENGTH }, uniqueness: { case_sensitive: false, allow_nil: true }
   validates :gross_weight_grams, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :remaining_weight_grams, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
@@ -49,10 +48,6 @@ class Spool < ApplicationRecord
 
   private
 
-  def set_defaults
-    self.inventory_tag = random_inventory_tag if inventory_tag.blank?
-  end
-
   def sync_remaining_weight_grams
     return if filament_id.blank?
 
@@ -74,11 +69,11 @@ class Spool < ApplicationRecord
     end
   end
 
-  def random_inventory_tag
+  def self.random_inventory_tag
     loop do
       code = INVENTORY_TAG_ALPHABET.sample(INVENTORY_TAG_LENGTH).join
 
-      next if self.class.any?(inventory_tag: code)
+      next if any?(inventory_tag: code)
 
       break code.upcase
     end
