@@ -1,7 +1,8 @@
 class SpoolsController < ApplicationController
   include ActionView::RecordIdentifier
 
-  before_action :set_spools, only: %i[index create update]
+  before_action :set_spools, only: %i[index create update destroy]
+  before_action :set_spool, only: %i[edit update destroy]
 
   def index; end
 
@@ -15,10 +16,11 @@ class SpoolsController < ApplicationController
     if @spool.save
       respond_to do |format|
         format.html do
-          flash[:notice] = t(".success")
-          redirect_to action: :index
+          redirect_to action: :index, notice: t(".success")
         end
-        format.turbo_stream
+        format.turbo_stream do
+          flash.now[:notice] = t(".success")
+        end
       end
     else
       flash.now[:alert] = t(".error")
@@ -27,26 +29,33 @@ class SpoolsController < ApplicationController
     end
   end
 
-  def edit
-    @spool = Spool.find params[:id]
-  end
+  def edit; end
 
   def update
-    @spool = Spool.find params[:id]
     @spool.attributes = spool_params
 
     if @spool.save
       respond_to do |format|
         format.html do
-          flash[:notice] = t(".success")
-          redirect_to action: :index
+          redirect_to action: :index, notice: t(".success")
         end
-        format.turbo_stream
+        format.turbo_stream do
+          flash.now[:notice] = t(".success")
+        end
       end
     else
       flash.now[:alert] = t(".error")
 
       render :edit
+    end
+  end
+
+  def destroy
+    flash[:notice] = @spool.destroy ? t(".success") : t(".error")
+
+    respond_to do |format|
+      format.html { redirect_to action: :index }
+      format.turbo_stream
     end
   end
 
@@ -58,5 +67,9 @@ class SpoolsController < ApplicationController
 
   def set_spools
     @spools = Spool.sorted_by_filament
+  end
+
+  def set_spool
+    @spool = Spool.find params[:id]
   end
 end

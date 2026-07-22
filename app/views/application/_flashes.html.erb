@@ -1,5 +1,7 @@
-<% flash.each do |type, message| %>
-  <div class="alert <%= bootstrap_class_for(type) %>">
-    <%= message %>
-  </div>
+<%= turbo_frame_tag :flashes do %>
+  <% flash.each do |type, message| %>
+    <div class="alert <%= bootstrap_class_for(type) %> show fade" data-controller="alert">
+      <%= message %>
+    </div>
+  <% end %>
 <% end %>
