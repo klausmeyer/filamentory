@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :spools, dependent: :destroy
+
+  def gravatar_hash
+    Digest::MD5.hexdigest(email.downcase)
+  end
 end
