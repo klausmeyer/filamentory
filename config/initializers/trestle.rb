@@ -50,7 +50,7 @@ Trestle.configure do |config|
   # Set the path to consider the application root (for title links and breadcrumbs).
   # Defaults to the same value as `config.path`.
   #
-  # config.root = "/"
+  config.root = "/"
 
   # Set the initial breadcrumbs to display in the breadcrumb trail.
   # Defaults to a breadcrumb labeled 'Home' linking to to the application root.
