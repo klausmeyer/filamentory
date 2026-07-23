@@ -68,7 +68,6 @@ RSpec.describe Spool, type: :model do
     spool.update!(filament_id: filament_b.id, gross_weight_grams: nil)
 
     expect(spool.remaining_weight_grams).to eq(750)
-    expect(spool.name).to eq(filament_b.name)
   end
 
   it "creates a PaperTrail version when updating" do

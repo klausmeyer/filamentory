@@ -19,8 +19,6 @@ Trestle.resource(:products) do
   end
 
   form do |product|
-    text_field :name
-
     row do
       col(sm: 4) { select :brand_id, Brand.order(:name).pluck(:name, :id), label: "Brand" }
       col(sm: 4) { select :material_id, Material.order(:name).pluck(:name, :id), label: "Material" }

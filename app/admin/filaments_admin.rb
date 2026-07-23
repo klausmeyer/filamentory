@@ -7,7 +7,6 @@ Trestle.resource(:filaments) do
     column :color, header: false, align: :center do |filament|
       color_swatch(filament.color_hex, size: 14)
     end
-    column :name, link: true, truncate: false
     column :product
     column :color_name
     column :color_hex do |filament|
@@ -31,12 +30,6 @@ Trestle.resource(:filaments) do
       col(sm: 6) do
         static_field :preview, label: "Preview" do
           color_swatch(filament.color_hex, size: 24)
-        end
-      end
-
-      col(sm: 6) do
-        static_field :name, label: "Computed name" do
-          filament.computed_name || "-"
         end
       end
     end
