@@ -1,4 +1,4 @@
-<%= link_to "Add Spool", new_spool_path, class: "btn btn-light btn-sm float-end", data: { turbo_frame: "modal" } %>
+<%= link_to "Add Spool", new_spool_path, class: ["btn btn-light btn-sm float-end", disabled: !user_signed_in?], data: { turbo_frame: "modal" } %>
 
 <%= turbo_frame_tag :spools_list do %>
   <%= render "list" %>
