@@ -15,31 +15,26 @@ class Spool < ApplicationRecord
   validates :gross_weight_grams, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :remaining_weight_grams, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  def self.sorted_by_filament
-    eager_load(filament: { product: [ :brand, :material, :variant ] }).order(
-      brands:    { name: :asc },
-      materials: { name: :asc },
-      variants:  { name: :asc },
-      filament:  { color_hex: :asc },
-      spools:    { remaining_weight_grams: :asc }
-    )
-  end
+  class << self
+    def sorted_by_filament
+      eager_load(filament: { product: [ :brand, :material, :variant ] }).order(
+        brands:    { name: :asc },
+        materials: { name: :asc },
+        variants:  { name: :asc },
+        filament:  { color_hex: :asc },
+        spools:    { remaining_weight_grams: :asc }
+      )
+    end
 
-  def name
-    loaded_filament = association(:filament).loaded? ? filament : nil
+    def random_inventory_tag
+      loop do
+        code = INVENTORY_TAG_ALPHABET.sample(INVENTORY_TAG_LENGTH).join
 
-    filament_name =
-      if loaded_filament.present? && loaded_filament.id == filament_id
-        loaded_filament.name
-      else
-        Filament.where(id: filament_id).pick(:name)
+        next if any?(inventory_tag: code)
+
+        break code.upcase
       end
-
-    filament_name.to_s
-  end
-
-  def to_s
-    name
+    end
   end
 
   def number_of_same_filament
@@ -66,16 +61,6 @@ class Spool < ApplicationRecord
       self.remaining_weight_grams = [ gross_weight_grams - filament_record.product.spool_weight_grams, 0 ].max
     else
       self.remaining_weight_grams = filament_record.product.weight_grams
-    end
-  end
-
-  def self.random_inventory_tag
-    loop do
-      code = INVENTORY_TAG_ALPHABET.sample(INVENTORY_TAG_LENGTH).join
-
-      next if any?(inventory_tag: code)
-
-      break code.upcase
     end
   end
 end
