@@ -1,4 +1,12 @@
 en:
+  activerecord:
+    attributes:
+      spool:
+        filament_id: "Filament"
+        gross_weight_grams: "Gross Weight (g)"
+        inventory_tag: "Inventory Tag"
+        ovp: "OVP"
+        refill_only: "Refill"
   spools:
     create:
       success: "The spool was successfully created"
