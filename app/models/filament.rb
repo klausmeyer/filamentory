@@ -6,6 +6,9 @@ class Filament < ApplicationRecord
   validates :product_id, presence: true
   validates :color_name, presence: true
   validates :color_hex, presence: true
+  validates :natural_color_sort_key, presence: true
+
+  before_validation :sync_natural_color_sort_key
 
   def self.sorted_by_name
     eager_load(product: [ :brand, :material, :variant ]).order(
@@ -18,5 +21,11 @@ class Filament < ApplicationRecord
 
   def name
     "#{product.brand.name} #{product.material.name} #{product.variant.name} - #{color_name}"
+  end
+
+  private
+
+  def sync_natural_color_sort_key
+    self.natural_color_sort_key = NaturalColorSortKey.for(color_hex: color_hex, color_name: color_name)
   end
 end

@@ -3,9 +3,11 @@ filament_black:
   name: Product A - Black
   color_name: Black
   color_hex: "#000000"
+  natural_color_sort_key: "0|0.0000|black"
 
 filament_white:
   product: product_a
   name: Product A - White
   color_name: White
   color_hex: "#FFFFFF"
+  natural_color_sort_key: "0|1.0000|white"
