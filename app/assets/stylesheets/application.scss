@@ -1,6 +1,9 @@
-@import "simplex/variables";
+@import "cosmo/variables";
+
+$progress-height: 1.2rem;
+
 @import "bootstrap";
-@import "simplex/bootswatch";
+@import "cosmo/bootswatch";
 
 .inventory-tag {
   letter-spacing: 0.2rem;
