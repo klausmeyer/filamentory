@@ -63,10 +63,6 @@ class SpoolsController < ApplicationController
 
   private
 
-  def require_authenticated_user
-    head :unauthorized unless user_signed_in?
-  end
-
   def spool_params
     params.expect(spool: [ :filament_id, :inventory_tag, :gross_weight_grams, :ovp, :refill_only ])
   end

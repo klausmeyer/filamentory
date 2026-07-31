@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   root to: "spools#index"
 
   resources :spools, only: [ :new, :create, :edit, :update, :destroy ]
+
+  resources :statistics, only: [ :index ]
 end

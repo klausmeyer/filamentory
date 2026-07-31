@@ -11,46 +11,17 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= turbo_frame_tag "modal" %>
+    <%= render "header" %>
 
-    <div class="header">
-      <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container">
-          <a href="/" class="navbar-brand d-flex align-items-center">
-            <strong>Filamentory</strong>
-          </a>
-          <% if user_signed_in? %>
-            <div class="dropdown text-end">
-              <a href="" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
-                <img src="https://www.gravatar.com/avatar/<%= current_user.gravatar_hash %>?d=mp" alt="mdo" width="32" height="32" class="rounded-circle">
-              </a>
-              <ul class="dropdown-menu text-small" data-popper-placement="bottom-start">
-                <li><a class="dropdown-item" href="<%= trestle.root_path %>">Admin</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-turbo-method="delete">Sign out</a></li>
-              </ul>
-            </div>
-          <% else %>
-            <div class="col-md-3 text-end">
-              <a href="<%= trestle.login_path %>" class="btn btn-outline-primary me-2">Login</a>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
     <div class="container">
       <div class="py-4">
         <%= render "flashes" %>
@@ -58,5 +29,7 @@
         <%= yield %>
       </div>
     </div>
+
+    <%= turbo_frame_tag "modal" %>
   </body>
 </html>

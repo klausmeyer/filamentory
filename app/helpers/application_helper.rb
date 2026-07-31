@@ -13,4 +13,8 @@ module ApplicationHelper
       flash_type.to_s
     end
   end
+
+  def gramms_as_kilogram(value)
+    number_with_delimiter "#{(value / 1000.0).round(2)} kg"
+  end
 end

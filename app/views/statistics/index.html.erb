@@ -1,0 +1,76 @@
+<div class="mb-3">
+  <h2>Statistics</h2>
+</div>
+
+<h4>General</h4>
+
+<table class="table table-striped">
+  <colgroup>
+    <col width="20%">
+    <col width="20%">
+    <col width="20%">
+    <col>
+  </colgroup>
+  <tr>
+    <th></th>
+    <th>Count</th>
+    <th>Weight</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Total</td>
+    <td><%= @statistics.spools_total_count %></td>
+    <td><%= gramms_as_kilogram @statistics.spools_total_weight %></td>
+    <td></td>
+  </tr>
+</table>
+
+<h4>Brands</h4>
+
+<table class="table table-striped">
+  <colgroup>
+    <col width="20%">
+    <col width="20%">
+    <col width="20%">
+    <col>
+  </colgroup>
+  <tr>
+    <th></th>
+    <th>Count</th>
+    <th>Weight</th>
+    <th></th>
+  </tr>
+  <% @statistics.by_brand.each do |row| %>
+    <tr>
+      <td><%= row[:name] %></td>
+      <td><%= row[:count] %></td>
+      <td><%= gramms_as_kilogram row[:weight] %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
+
+<h4>Materials</h4>
+
+<table class="table table-striped">
+  <colgroup>
+    <col width="20%">
+    <col width="20%">
+    <col width="20%">
+    <col>
+  </colgroup>
+  <tr>
+    <th></th>
+    <th>Count</th>
+    <th>Weight</th>
+    <th></th>
+  </tr>
+  <% @statistics.by_material.each do |row| %>
+    <tr>
+      <td><%= row[:name] %></td>
+      <td><%= row[:count] %></td>
+      <td><%= gramms_as_kilogram row[:weight] %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
