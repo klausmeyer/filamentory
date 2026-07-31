@@ -12,10 +12,11 @@ class Filament < ApplicationRecord
       brands:    { name: :asc },
       materials: { name: :asc },
       variants:  { name: :asc },
+      filaments: { color_name: :asc }
     )
   end
 
   def name
-    "#{product.brand.name} #{product.material.name} #{product.variant.name}"
+    "#{product.brand.name} #{product.material.name} #{product.variant.name} - #{color_name}"
   end
 end
