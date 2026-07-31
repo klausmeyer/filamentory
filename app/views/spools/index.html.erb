@@ -1,4 +1,6 @@
-<%= link_to "Add Spool", new_spool_path, class: ["btn btn-light btn-sm float-end", disabled: !user_signed_in?], data: { turbo_frame: "modal" } %>
+<div class="mb-5">
+  <%= link_to "Add Spool", new_spool_path, class: ["btn btn-primary btn-sm float-end", disabled: !user_signed_in?], data: { turbo_frame: "modal" } %>
+</div>
 
 <%= turbo_frame_tag :spools_list do %>
   <%= render "list" %>
