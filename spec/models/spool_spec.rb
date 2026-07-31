@@ -81,4 +81,41 @@ RSpec.describe Spool, type: :model do
     expect(update_version).to be_present
     expect(update_version.changeset.fetch("comment")).to eq([ nil, "Updated" ])
   end
+
+  it "sorts spools by product, natural color order, and remaining weight" do
+    product_a = create_product!(name: "A", spool_weight_grams: 250)
+    product_b = create_product!(name: "B", spool_weight_grams: 250)
+
+    red = create_filament!(product: product_a, color_name: "Red", color_hex: "#ff0000")
+    blue = create_filament!(product: product_a, color_name: "Blue", color_hex: "#0000ff")
+    yellow = create_filament!(product: product_a, color_name: "Yellow", color_hex: "#ffff00")
+    white = create_filament!(product: product_a, color_name: "White", color_hex: "#ffffff")
+    black = create_filament!(product: product_a, color_name: "Black", color_hex: "#000000")
+    green = create_filament!(product: product_a, color_name: "Green", color_hex: "#00ff00")
+    other_product_red = create_filament!(product: product_b, color_name: "Red", color_hex: "#ff0000")
+
+    Spool.create!(filament: blue, gross_weight_grams: nil, ovp: false, refill_only: false)
+    Spool.create!(filament: green, gross_weight_grams: nil, ovp: false, refill_only: false)
+    Spool.create!(filament: black, gross_weight_grams: nil, ovp: false, refill_only: false)
+    Spool.create!(filament: other_product_red, gross_weight_grams: nil, ovp: false, refill_only: false)
+    Spool.create!(filament: red, gross_weight_grams: 750, ovp: false, refill_only: false)
+    Spool.create!(filament: white, gross_weight_grams: nil, ovp: false, refill_only: false)
+    Spool.create!(filament: yellow, gross_weight_grams: nil, ovp: false, refill_only: false)
+    Spool.create!(filament: red, gross_weight_grams: 600, ovp: false, refill_only: false)
+
+    sorted = Spool.sorted_by_filament.select { |spool| [ product_a, product_b ].include?(spool.filament.product) }
+
+    expect(sorted.map { |spool| [ spool.filament.product.name, spool.filament.color_name, spool.remaining_weight_grams ] }).to eq(
+      [
+        [ "A", "Black", 1_000 ],
+        [ "A", "White", 1_000 ],
+        [ "A", "Red", 350 ],
+        [ "A", "Red", 500 ],
+        [ "A", "Yellow", 1_000 ],
+        [ "A", "Green", 1_000 ],
+        [ "A", "Blue", 1_000 ],
+        [ "B", "Red", 1_000 ]
+      ]
+    )
+  end
 end
