@@ -9,3 +9,8 @@ $progress-height: 1.2rem;
   letter-spacing: 0.2rem;
   padding-right: 0.2rem;
 }
+
+.account-dropdown-menu {
+  --bs-dropdown-link-hover-bg: var(--bs-primary-bg-subtle);
+  --bs-dropdown-link-hover-color: var(--bs-primary-text-emphasis);
+}
