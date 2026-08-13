@@ -11,5 +11,9 @@
 </div>
 
 <%= turbo_frame_tag :spools_list do %>
-  <%= render "list" %>
+  <% if @spools.any? %>
+    <%= render "list" %>
+  <% else %>
+    <%= render "empty_state" %>
+  <% end %>
 <% end %>
