@@ -1,9 +1,19 @@
-<div class="mb-3">
-  <h2 class="float-start">Inventory</h2>
+<div class="mb-3 row">
+  <h2 class="col">Inventory</h2>
 
-  <%= link_to "Add Spool", new_spool_path, class: ["btn btn-primary btn-sm float-end", disabled: !user_signed_in?], data: { turbo_frame: "modal" } %>
+  <div class="col">
+    <%= render "search_field" %>
+  </div>
+
+  <div class="col">
+    <%= link_to "Add Spool", new_spool_path, class: ["btn btn-primary float-end", disabled: !user_signed_in?], data: { turbo_frame: "modal" } %>
+  </div>
 </div>
 
 <%= turbo_frame_tag :spools_list do %>
-  <%= render "list" %>
+  <% if @spools.any? %>
+    <%= render "list" %>
+  <% else %>
+    <%= render "empty_state" %>
+  <% end %>
 <% end %>

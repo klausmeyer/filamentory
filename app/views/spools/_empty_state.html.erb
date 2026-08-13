@@ -1,0 +1,24 @@
+<div class="d-flex flex-column align-items-center justify-content-center text-center py-5 px-3">
+  <% if params.key?(:query) %>
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-search text-secondary mb-3" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+    </svg>
+    <h5 class="fw-semibold mb-1">
+      No results for “<%= params[:query] %>”
+    </h5>
+    <p class="text-muted small mb-3">
+      Try adjusting your search terms or removing active filters to find what you are looking for.
+    </p>
+  <% else %>
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-file-earmark-x mb-3" viewBox="0 0 16 16">
+      <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293z"/>
+      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+    </svg>
+    <h5 class="fw-semibold mb-1">
+      No spools found
+    </h5>
+    <p class="text-muted small mb-3">
+      Spools created via the “Add spool” button will appear here.
+    </p>
+  <% end %>
+</div>

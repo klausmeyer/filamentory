@@ -69,6 +69,7 @@ class SpoolsController < ApplicationController
 
   def set_spools
     @spools = Spool.sorted_by_filament
+    @spools = @spools.search(params[:query]) if params[:query].present?
   end
 
   def set_spool
