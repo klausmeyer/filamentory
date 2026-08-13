@@ -1,4 +1,13 @@
 class Spool < ApplicationRecord
+  include PgSearch::Model
+
+  pg_search_scope :search,
+    against: [ :inventory_tag ],
+    associated_against: {
+      filament: [ :color_name ]
+    },
+    using: { tsearch: { prefix: true } }
+
   INVENTORY_TAG_ALPHABET = %w[1 2 3 4 5 6 7 8 9 A B C D E F G H J K M N P Q R S T V W X Y Z].freeze
   INVENTORY_TAG_LENGTH = 5
 

@@ -15,6 +15,9 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
+# Search
+gem "pg_search"
+
 # Public UI
 gem "bootstrap", "~> 5.3.8"
 gem "bootswatch", github: "thomaspark/bootswatch", branch: "v5"
