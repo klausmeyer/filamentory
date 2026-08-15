@@ -8,8 +8,4 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :weight_grams, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :spool_weight_grams, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-
-  def diameter
-    1.75
-  end
 end
