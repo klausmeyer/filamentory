@@ -26,8 +26,9 @@ Trestle.resource(:products) do
     end
 
     row do
-      col(sm: 6) { number_field :weight_grams, label: "Net weight (g)" }
-      col(sm: 6) { number_field :spool_weight_grams, label: "Empty spool weight (g)" }
+      col(sm: 4) { number_field :diameter, label: "Diameter (mm)", step: :any }
+      col(sm: 4) { number_field :weight_grams, label: "Net weight (g)" }
+      col(sm: 4) { number_field :spool_weight_grams, label: "Empty spool weight (g)" }
     end
   end
 
@@ -37,6 +38,7 @@ Trestle.resource(:products) do
       :brand_id,
       :material_id,
       :variant_id,
+      :diameter,
       :weight_grams,
       :spool_weight_grams
     )
