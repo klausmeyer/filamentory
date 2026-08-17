@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   resources :spools, only: [ :new, :create, :edit, :update, :destroy ]
 
+  resources :activities, only: [ :index ]
+
   resources :statistics, only: [ :index ]
 end

@@ -1,4 +1,10 @@
 en:
+  date:
+    formats:
+      default: "%A, %B %e, %Y"
+  time:
+    formats:
+      default: "%H:%M"
   activerecord:
     attributes:
       spool:

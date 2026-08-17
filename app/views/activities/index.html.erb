@@ -1,0 +1,35 @@
+<div class="mb-3">
+  <h2>Activity</h2>
+</div>
+
+<% @activities.group_by { it.created_at.to_date }.each do |day, activities| %>
+  <div class="my-3 p-3 bg-body rounded shadow-sm mb-5">
+    <h6 class="border-bottom pb-2 mb-0"><%= l day %></h6>
+    <% activities.each do |activity| %>
+      <% next if activity.item.nil? %>
+      <div class="row text-body-secondary py-3 border-bottom">
+        <div class="col">
+          <div class="rounded-2 border" style="width: 45px; height: 45px; background-color: <%= activity.item.filament.color_hex %>">&nbsp;</div>
+        </div>
+        <div class="col-5">
+          <%= activity.item.inventory_tag %>
+          &middot;
+          <%= activity.item.filament.product.brand.name %>
+          &middot;
+          <%= activity.item.filament.product.material.name %>
+          <%= activity.item.filament.product.variant.name %>
+        </div>
+        <div class="col-5">
+          <% if (old_weight, new_weight = activity.object_changes["remaining_weight_grams"]).first == 0 %>
+            Created
+          <% else %>
+            Remaining weight: <%= number_with_delimiter old_weight %> → <%= number_with_delimiter new_weight %> g
+          <% end %>
+        </div>
+        <div class="col text-end">
+          <%= l activity.created_at.to_time %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
