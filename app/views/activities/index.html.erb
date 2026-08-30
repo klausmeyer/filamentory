@@ -6,7 +6,6 @@
   <div class="my-3 p-3 bg-body rounded shadow-sm mb-5">
     <h6 class="border-bottom pb-2 mb-0"><%= l day %></h6>
     <% activities.each do |activity| %>
-      <% next if activity.item.nil? %>
       <div class="row text-body-secondary py-3 border-bottom">
         <div class="col">
           <div class="rounded-2 border" style="width: 45px; height: 45px; background-color: <%= activity.item.filament.color_hex %>">&nbsp;</div>
@@ -19,12 +18,11 @@
           <%= activity.item.filament.product.material.name %>
           <%= activity.item.filament.product.variant.name %>
         </div>
-        <div class="col-5">
-          <% if (old_weight, new_weight = activity.object_changes["remaining_weight_grams"]).first == 0 %>
-            Created
-          <% else %>
-            Remaining weight: <%= number_with_delimiter old_weight %> → <%= number_with_delimiter new_weight %> g
-          <% end %>
+        <div class="col-5 text-end">
+          <%= number_with_delimiter activity.object_changes["remaining_weight_grams"].first %>
+          →
+          <%= number_with_delimiter activity.object_changes["remaining_weight_grams"].second %>
+          g
         </div>
         <div class="col text-end">
           <%= l activity.created_at.to_time %>
