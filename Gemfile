@@ -30,6 +30,8 @@ gem "trestle-search", "~> 0.5.1"
 
 # Authentication
 gem "devise"
+gem "omniauth_openid_connect"
+gem "omniauth-rails_csrf_protection"
 
 # Auditing / change tracking
 gem "paper_trail"
