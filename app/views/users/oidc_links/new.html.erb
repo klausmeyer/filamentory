@@ -1,0 +1,20 @@
+<% content_for :title, "Connect #{oidc_provider_name}" %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <h1 class="h3 mb-3">Connect <%= oidc_provider_name %></h1>
+
+    <% if current_user.oidc_identity %>
+      <p class="text-body-secondary">
+        <%= oidc_provider_name %> is linked to <%= current_user.oidc_identity.email.presence || current_user.oidc_identity.uid %>.
+      </p>
+      <%= link_to "Back to account", trestle.auth_account_admin_path, class: "btn btn-outline-secondary" %>
+    <% else %>
+      <p class="text-body-secondary">
+        Link <%= current_user.email %> to your <%= oidc_provider_name %> account.
+      </p>
+
+      <%= oidc_button(label: "Connect #{oidc_provider_name}", enabled_class: "btn btn-primary") %>
+    <% end %>
+  </div>
+</div>

@@ -10,6 +10,13 @@ Trestle.resource(:users, model: User, scope: Auth) do
       avatar_for(user)
     end
     column :email, link: true
+    column :oidc, header: -> { oidc_provider_name }, align: :center do |user|
+      if user.oidc_identity
+        status_tag("Linked", :success)
+      else
+        status_tag("Not linked", :default)
+      end
+    end
     actions do |a|
       a.delete unless a.instance == current_user
     end
@@ -17,6 +24,23 @@ Trestle.resource(:users, model: User, scope: Auth) do
 
   form do |user|
     text_field :email
+
+    static_field :oidc_account, label: "#{oidc_provider_name} Account" do
+      identity = user.oidc_identity
+
+      if identity
+        identity_status = [
+          tag.p(identity.email.presence || identity.uid, class: "form-control-static"),
+          tag.p("Linked #{l(identity.updated_at, format: :short)}", class: "form-text")
+        ]
+        identity_status << oidc_unlink_button if user == current_user
+        safe_join(identity_status)
+      elsif user == current_user
+        oidc_connect_link
+      else
+        tag.p("Not linked", class: "form-control-static text-muted")
+      end
+    end
 
     row do
       col(sm: 6) { password_field :password }

@@ -1,0 +1,44 @@
+<% content_for :title, "Log in" %>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <header class="mb-4">
+      <p class="text-uppercase text-primary fw-semibold small mb-2">Filamentory</p>
+      <h1 class="h3 mb-2">Log in</h1>
+      <p class="text-body-secondary mb-0">Use your account to manage inventory and activity.</p>
+    </header>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "vstack gap-3" }) do |f| %>
+      <div>
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div>
+        <div class="d-flex align-items-center justify-content-between gap-3">
+          <%= f.label :password, class: "form-label" %>
+          <%= link_to "Forgot password?", new_password_path(resource_name), class: "small" %>
+        </div>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, class: "form-check-label" %>
+        </div>
+      <% end %>
+
+      <%= f.submit "Log in", class: "btn btn-primary btn-lg w-100" %>
+    <% end %>
+
+    <div class="auth-divider">
+      <span>or</span>
+    </div>
+
+    <%= oidc_button(
+          enabled_class: "btn btn-outline-primary btn-lg w-100",
+          disabled_class: "btn btn-outline-secondary btn-lg w-100"
+        ) %>
+  </div>
+</div>

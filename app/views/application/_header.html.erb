@@ -15,13 +15,14 @@
               <img src="https://www.gravatar.com/avatar/<%= current_user.gravatar_hash %>?d=mp" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu dropdown-menu-end text-small account-dropdown-menu" data-bs-theme="light">
+              <li><a class="dropdown-item" href="<%= trestle.auth_account_admin_path %>">My Account</a></li>
               <li><a class="dropdown-item" href="<%= trestle.root_path %>">Admin</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<%= destroy_user_session_path %>" data-turbo-method="delete">Sign out</a></li>
             </ul>
           </div>
         <% else %>
-          <a href="<%= trestle.login_path %>" class="btn btn-outline-primary">Login</a>
+          <a href="<%= new_user_session_path %>" class="btn btn-outline-primary">Login</a>
         <% end %>
       </div>
     </div>

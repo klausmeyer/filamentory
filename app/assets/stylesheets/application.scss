@@ -14,3 +14,38 @@ $progress-height: 1.2rem;
   --bs-dropdown-link-hover-bg: var(--bs-primary-bg-subtle);
   --bs-dropdown-link-hover-color: var(--bs-primary-text-emphasis);
 }
+
+.auth-page {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.auth-card {
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 1rem 3rem rgba(33, 37, 41, 0.08);
+  max-width: 28rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+.auth-divider {
+  align-items: center;
+  color: var(--bs-secondary-color);
+  display: flex;
+  font-size: 0.875rem;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  background: var(--bs-border-color);
+  content: "";
+  flex: 1;
+  height: 1px;
+}

@@ -77,6 +77,7 @@ Trestle.configure do |config|
   # config.helper :all
   config.helper -> { ColorSwatchHelper }
   config.helper -> { AdminFormatHelper }
+  config.helper -> { OidcHelper }
 
   # Register callbacks to run before, after or around all Trestle actions.
   #

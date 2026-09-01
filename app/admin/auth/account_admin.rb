@@ -8,6 +8,20 @@ Trestle.resource(:account, model: User, scope: Auth, singular: true) do
   form do |user|
     text_field :email
 
+    static_field :oidc_account, label: "#{oidc_provider_name} Account" do
+      identity = user.oidc_identity
+
+      if identity
+        safe_join([
+          tag.p(identity.email.presence || identity.uid, class: "form-control-static"),
+          tag.p("Linked #{l(identity.updated_at, format: :short)}", class: "form-text"),
+          oidc_unlink_button
+        ])
+      else
+        oidc_connect_link
+      end
+    end
+
     row do
       col(sm: 6) { password_field :password }
       col(sm: 6) { password_field :password_confirmation }

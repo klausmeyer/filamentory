@@ -1,0 +1,12 @@
+admin_oidc:
+  user: admin
+  provider: openid_connect
+  uid: oidc-admin-sub
+  issuer: https://idp.example.test
+  email: admin@example.com
+  email_verified: true
+  name: Admin User
+  raw_info:
+    sub: oidc-admin-sub
+    email: admin@example.com
+    email_verified: true

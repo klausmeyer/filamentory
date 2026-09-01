@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_15_162842) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_01_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,6 +69,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_162842) do
     t.index ["filament_id"], name: "index_spools_on_filament_id"
   end
 
+  create_table "user_identities", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.boolean "email_verified", default: false, null: false
+    t.string "issuer"
+    t.string "name"
+    t.string "provider", null: false
+    t.jsonb "raw_info", default: {}, null: false
+    t.string "uid", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["issuer", "uid"], name: "index_user_identities_on_issuer_and_uid", unique: true
+    t.index ["provider", "uid"], name: "index_user_identities_on_provider_and_uid", unique: true
+    t.index ["user_id"], name: "index_user_identities_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -108,4 +124,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_15_162842) do
   add_foreign_key "products", "materials"
   add_foreign_key "products", "variants"
   add_foreign_key "spools", "filaments"
+  add_foreign_key "user_identities", "users"
 end
