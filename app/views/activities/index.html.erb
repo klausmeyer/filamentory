@@ -1,33 +1,54 @@
-<div class="mb-3">
-  <h2>Activity</h2>
+<div class="mb-3 row">
+  <h2 class="col">Activity</h2>
 </div>
 
-<% @activities.group_by { it.created_at.to_date }.each do |day, activities| %>
-  <div class="my-3 p-3 bg-body rounded shadow-sm mb-5">
-    <h6 class="border-bottom pb-2 mb-0"><%= l day %></h6>
-    <% activities.each do |activity| %>
-      <div class="row text-body-secondary py-3 border-bottom">
-        <div class="col">
-          <div class="rounded-2 border" style="width: 45px; height: 45px; background-color: <%= activity.item.filament.color_hex %>">&nbsp;</div>
-        </div>
-        <div class="col-5">
-          <%= activity.item.inventory_tag %>
-          &middot;
-          <%= activity.item.filament.product.brand.name %>
-          &middot;
-          <%= activity.item.filament.product.material.name %>
-          <%= activity.item.filament.product.variant.name %>
-        </div>
-        <div class="col-5 text-end">
-          <%= number_with_delimiter activity.object_changes["remaining_weight_grams"].first %>
-          →
-          <%= number_with_delimiter activity.object_changes["remaining_weight_grams"].second %>
-          g
-        </div>
-        <div class="col text-end">
-          <%= l activity.created_at.to_time %>
-        </div>
-      </div>
+<table class="table">
+  <colgroup>
+    <col width="10%">
+    <col width="30%">
+    <col width="20%">
+    <col width="30%">
+    <col width="10%">
+  </colgroup>
+  <tbody>
+    <% @activities.group_by { it.created_at.to_date }.each do |day, activities| %>
+      <tr class="table-light">
+        <th colspan="5"><%= l day %></th>
+      </tr>
+      <% activities.each do |activity| %>
+        <tr>
+          <td>
+            <div class="d-flex justify-content-center">
+              <div class="rounded-2 border" style="width: 45px; height: 45px; background-color: <%= activity.item.filament.color_hex %>">&nbsp;</div>
+            </div>
+          </td>
+          <td>
+            <p class="my-0">
+              <strong>
+                <%= activity.item.filament.product.brand.name %>
+                &middot;
+                <%= activity.item.filament.product.material.name %>
+                <%= activity.item.filament.product.variant.name %>
+              </strong>
+            </p>
+          </td>
+          <td>
+            <span class="badge pill text-bg-dark font-monospace inventory-tag"><%= activity.item.inventory_tag %></span>
+          </td>
+          <td class="text-end">
+            <%-
+              grams_old, grams_new = activity.object_changes["remaining_weight_grams"]
+              grams_diff = grams_new - grams_old
+            %>
+
+            <%= number_with_delimiter grams_old %> → <%= number_with_delimiter grams_new %> g
+            (<% if grams_diff > 0 %>+<% end %><%= number_with_delimiter grams_diff %> g)
+          </td>
+          <td class="text-end">
+            <%= l activity.created_at.to_time %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
-  </div>
-<% end %>
+  </tbody>
+</table>
